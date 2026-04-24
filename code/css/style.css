@@ -1,0 +1,71 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #444;
+    color: #BBB;
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+.cl_stacked {
+    /*position: absolute;
+    top: 0%;
+    left: 0%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*grid-area: 1 / 1;*/
+}
+/*
+Either one is working.
+
+I'm having an idea. What if I set
+
+*/
+/*====================*/
+/*====================*/
+/*====================*/
+
+#id_gameContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid blue;
+}
+
+#id_gameAreaContainer {
+    border: 2px solid red;
+}
+
+#id_tb_gameArea {
+    border: 2px solid black;
+    /*display: grid;
+    place-items: center;*/
+}
+
+#id_tb_gameArea table {
+    /*grid-area: 1 / 1;*/
+}
+
+#id_tb_gameAreaOverlay1 {
+}
+
+#id_tb_gameArea, #id_tb_gameArea > tr, #id_tb_gameArea > tr > td {
+}
+
+#id_tb_gameArea > tr > td {
+    /*background-color: #248;*/
+    border-width: 3px;
+    /*white-space: nowrap;*/
+}
+
+#id_controlPanel {
+    display: flex;
+    flex-direction: row;
+}
