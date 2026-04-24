@@ -12,6 +12,8 @@ Snake direction:
     spawned: false
 };
 
+let snakeFreeze = false;
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -91,6 +93,16 @@ function drawDeadSnake() {
 /*====================*/
 /*====================*/
 
+function drawWinnerSnakeToArea() {
+    let maxIdx = snake.body.length-1;
+    for (let i = 0; i <= maxIdx; i++)
+        gameArea[snake.body[maxIdx-i].x][snake.body[maxIdx-i].y].element.style.background = WIN_COLORS[(i+winAnimationFrame) % WIN_COLORS.length];
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
 function eraseSnake() {
     for (let i = 0; i < snake.body.length; i++)
         setPosition(snake.body[i].x, snake.body[i].y, TYPE.CLEAR);
@@ -101,6 +113,9 @@ function eraseSnake() {
 /*====================*/
 
 function snakeStep() {
+    if (snakeFreeze)
+        return;
+
     let grow = false;
     let nextPosition = {x: snake.body[0].x+DIRECTION[snake.direction].x,
                         y: snake.body[0].y+DIRECTION[snake.direction].y};
@@ -122,6 +137,7 @@ function snakeStep() {
         if (isPosition(nextPosition.x, nextPosition.y, TYPE.APPLE)) {
             e_appleCounter.innerHTML = parseInt(e_appleCounter.innerHTML)+1;
             grow = true;
+            spawnPoisonedApple();
         }
         else if (isPosition(nextPosition.x, nextPosition.y, TYPE.POISON)) {
             e_poisonCounter.innerHTML = parseInt(e_poisonCounter.innerHTML)+1;
@@ -140,7 +156,11 @@ function snakeStep() {
         }
 
         snake.body = newBody;
-        drawSnake();
+
+        if (parseInt(e_appleCounter.innerHTML) >= POINTS_TO_WIN)
+            gameWon();
+        else
+            drawSnake();
     }
 }
 

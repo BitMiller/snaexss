@@ -1,9 +1,15 @@
 let frame = 0;
+let winAnimationFrame = 0;
 
 let animationHandle = undefined;
 
+let frameInterval = 15;
+let stepInterval = 10;
+let winInterval = 3;
+
+
 function frameStep() {
-    if (frame % 10 == 0) {
+    if (frame % stepInterval == 0 && !snakeFreeze) {
         //> Handle direction control:
         if (controlBuffer.length > 0) {
             snake.direction = KEY_TO_DIRECTION[controlBuffer[controlBuffer.length-1]];
@@ -15,12 +21,17 @@ function frameStep() {
         //console.log("Step!");
     }
 
+    if (gameState == GAME_STATE.WON && frame % winInterval == 0) {
+        drawWinnerSnakeToArea();
+        winAnimationFrame++;
+    }
+
     frame++;
 }
 
 function startAnimation() {
     if (animationHandle === undefined)
-        animationHandle = setInterval(frameStep, 25);
+        animationHandle = setInterval(frameStep, frameInterval);
 }
 
 function stopAnimation() {

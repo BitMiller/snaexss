@@ -10,8 +10,6 @@ const controlKeys = [
     "ArrowLeft"
 ];
 
-let residueKey = false;
-
 let gameState = GAME_STATE.IDLE;
 
 const combos = [
@@ -45,7 +43,7 @@ function keyDownHandler(event) {
         console.log(`gameState: ${gameState}`);
         if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED)
             gamePlay();
-        else if (gameState == GAME_STATE.DEAD) {
+        else if (gameState == GAME_STATE.DEAD || gameState == GAME_STATE.WON) {
             console.log("Revival!");
             gameIdle();
         }

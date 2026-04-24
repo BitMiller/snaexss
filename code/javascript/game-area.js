@@ -23,7 +23,7 @@ function generateGameArea(elementAttachTo) {
     }
 
     let newTable = document.createElement("table");
-    //newTable.classList.add("cl_stacked");
+    newTable.classList.add("cl_positionAbsolute");
     newTable.style.tableLayout = "fixed";
     newTable.style.width = (gridSize*(xSize+6))+"px";
     newTable.style.height = (gridSize*(ySize+6))+"px";
@@ -41,16 +41,16 @@ function generateGameArea(elementAttachTo) {
 
         newTable.appendChild(newTr);
     }
-/*
+
     let tableOverlay1 = newTable.cloneNode(true);
-    tableOverlay1.style.background = "#f005";
-*/
+    //tableOverlay1.style.background = "#f005";
+
     newTable.id = "id_tb_gameArea";
     elementAttachTo.appendChild(newTable);
-/*
+
     tableOverlay1.id = "id_tb_gameAreaOverlay1";
     elementAttachTo.appendChild(tableOverlay1);
-*/
+
 }
 
 /*====================*/
@@ -162,7 +162,7 @@ function spawnPoint(clearanceDistance = 0, areaType) {
         tries++;
     }
     if (tries == maxTries)
-        console.log(`spawnApple(): Unbelievable! Couldn't spawn an apple in a max of ${maxTries} tries!`);
+        console.log(`spawnPoint(): Unbelievable! Couldn't spawn a point in a max of ${maxTries} tries!`);
     else
         setPosition(x, y, areaType);
     //console.log("Tries: "+tries);
@@ -182,6 +182,54 @@ function spawnApple(clearanceDistance = 0) {
 
 function spawnPoison(clearanceDistance = 0) {
     spawnPoint(clearanceDistance, TYPE.POISON);
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function spawnPoisonedApple(clearDist = 2) {
+    let apple = locateSpawnPoint(clearDist);
+    if (!apple)
+        return;
+
+    let i = 0;
+    let randDir = Math.floor(Math.random() * 4);
+    let x2, y2;
+
+    do {
+        x2 = apple.x + DIRECTION[(i+randDir)%4].x;
+        y2 = apple.y + DIRECTION[(i+randDir)%4].y;
+        i++;
+    }
+    while (i <= 4 && !isClearPosition(x2, y2));
+
+    setPosition(apple.x, apple.y, TYPE.APPLE);
+    setPosition(x2, y2, TYPE.POISON);
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function locateSpawnPoint(clearDist = 0, maxTries = 100) {
+    let tries = 0;
+    let x = 0;
+    let y = 0;
+    while (tries < maxTries) {
+        x = Math.floor(Math.random() * xSize);
+        y = Math.floor(Math.random() * ySize);
+        if (isClearInRadiusOrOut(x, y, clearDist))
+            break;
+        tries++;
+    }
+
+    if (tries == maxTries) {
+        console.log(`locateSpawnPoint(): Unbelievable! Couldn't locate a point in a max of ${maxTries} tries!`);
+        return false;
+    }
+    else
+        return { "x": x, "y": y };
 }
 
 /*====================*/
@@ -342,6 +390,7 @@ function directionVectorEndPoint(x, y, direction, size) {
 function gameIdle() {
 //> Reset game (play area, couters), show starter text (Press space to play, on mobiles: Tap here to start)
     gameState = GAME_STATE.IDLE;
+    snakeFreeze = false;
     stopAnimation();
     e_appleCounter.innerHTML = 0;
     e_poisonCounter.innerHTML = 0;
@@ -350,10 +399,13 @@ function gameIdle() {
     generateGameArea(e_gameAreaContainer);
 
     for (let i = 0; i < 10; i++)
+        spawnPoisonedApple();
+/*
+    for (let i = 0; i < 10; i++)
         spawnApple(2);
     for (let i = 0; i < 10; i++)
         spawnPoison(2);
-
+*/
     spawnSnake();
     drawGameArea();
 }
@@ -397,6 +449,16 @@ function gameUnpause() {
 function gameDead() {
     gameState = GAME_STATE.DEAD;
     stopAnimation();
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function gameWon() {
+    gameState = GAME_STATE.WON;
+    snakeFreeze = true;
+    //stopAnimation();
 }
 
 /*====================*/

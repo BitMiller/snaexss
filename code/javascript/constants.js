@@ -1,5 +1,7 @@
-const SNAKE_START_LENGTH = 4;
+const SNAKE_START_LENGTH = 2;
 const SNAKE_CLEARANCE_AHEAD = 4;
+
+const POINTS_TO_WIN = 20;
 
 const DIRECTION = [
     { x:  0, y: -1 }, //> UP
@@ -33,5 +35,21 @@ const GAME_STATE = {
     IDLE : 0,
     PLAYING : 1,
     PAUSED : 2,
-    DEAD : 3
+    DEAD : 3,
+    WON : 4
 };
+
+const WIN_COLORS = [
+    "#f00",
+    "#f80",
+    "#ff0",
+    "#8f0",
+    "#0f0",
+    "#0f8",
+    "#0ff",
+    "#08f",
+    "#00f",
+    "#80f",
+    "#f0f",
+    "#f08",
+];

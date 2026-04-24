@@ -13,19 +13,10 @@ body {
 /*====================*/
 /*====================*/
 
-.cl_stacked {
-    /*position: absolute;
-    top: 0%;
-    left: 0%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*grid-area: 1 / 1;*/
+.cl_positionAbsolute {
+    position: absolute;
 }
-/*
-Either one is working.
 
-I'm having an idea. What if I set
-
-*/
 /*====================*/
 /*====================*/
 /*====================*/
@@ -41,22 +32,16 @@ I'm having an idea. What if I set
 
 #id_gameAreaContainer {
     border: 2px solid red;
+    position: relative;
 }
 
 #id_tb_gameArea {
     border: 2px solid black;
-    /*display: grid;
-    place-items: center;*/
+    /*position: absolute;*/
 }
-
-#id_tb_gameArea table {
-    /*grid-area: 1 / 1;*/
-}
-
+ 
 #id_tb_gameAreaOverlay1 {
-}
-
-#id_tb_gameArea, #id_tb_gameArea > tr, #id_tb_gameArea > tr > td {
+    /*position: absolute;*/
 }
 
 #id_tb_gameArea > tr > td {
