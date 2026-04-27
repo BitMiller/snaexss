@@ -26,6 +26,9 @@
 
 > https://www.toptal.com/developers/keycode
 
+> Extra layer between different input sources and game control:
+ > https://chatgpt.com/c/69ef1834-5370-8329-999a-fd7857af0d1a : war
+
 -->
 
 <html lang="hu">
@@ -54,6 +57,26 @@
                 <span>&nbsp;Méreg: <span id="id_poisonCounter">0</span> |</span>
                 <span>&nbsp;Lépések: <span id="id_stepCounter">0</span></span>
             </div>
+<!--
+> https://chatgpt.com/c/69ef1626-2a00-8330-9bdc-435f93ea48c3 : war
+-->
+            <table id="id_tb_controlButtons">
+                <tr>
+                    <td></td>
+                    <td><button onclick="keyDirectionsHandler('ArrowUp')"></button></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><button onclick="keyDirectionsHandler('ArrowLeft')"></button></td>
+                    <td><button onclick="keySpaceHandler()"></button></td>
+                    <td><button onclick="keyDirectionsHandler('ArrowRight')"></button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button onclick="keyDirectionsHandler('ArrowDown')"></button></td>
+                    <td></td>
+                </tr>
+            </table> <!-- id_tb_controlButtons -->
         </div>
 
         <script type="text/javascript" src="code/javascript/constants.js"></script>

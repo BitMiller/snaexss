@@ -50,6 +50,20 @@ body {
     /*white-space: nowrap;*/
 }
 
+#id_tb_controlButtons {
+    /*width: 300px;
+    height: 300px;
+    border: 2px solid black;*/
+}
+
+#id_tb_controlButtons button {
+    /*min-width: 100px;
+    min-height: 100px;*/
+    width: 100px;
+    height: 100px;
+    color: red;
+}
+
 #id_controlPanel {
     display: flex;
     flex-direction: row;

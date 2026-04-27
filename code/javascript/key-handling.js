@@ -3,7 +3,7 @@ const pressedKeys = new Set();
 
 const controlBuffer = [];
 
-const controlKeys = [
+const directionKeys = [
     "ArrowUp",
     "ArrowRight",
     "ArrowDown",
@@ -35,20 +35,12 @@ function keyDownHandler(event) {
         event.stopPropagation();
     }
 
-    if (gameState == GAME_STATE.PLAYING && controlKeys.includes(event.code) && DIRECTION_TO_KEY[(snake.direction+2)%4] != event.code) {
-        controlBuffer.push(event.code);
+    if (directionKeys.includes(event.code)) {
+        keyDirectionsHandler(event.code);
     }
 
     if (event.code == "Space") {
-        console.log(`gameState: ${gameState}`);
-        if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED)
-            gamePlay();
-        else if (gameState == GAME_STATE.DEAD || gameState == GAME_STATE.WON) {
-            console.log("Revival!");
-            gameIdle();
-        }
-        else
-            gamePause();
+        keySpaceHandler();
     }
 }
 
@@ -63,6 +55,30 @@ function keyUpHandler(event) {
 
         pressedKeys.delete(event.code);
     }
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function keyDirectionsHandler(keyCode) {
+    if (gameState == GAME_STATE.PLAYING && DIRECTION_TO_KEY[(snake.direction+2)%4] != keyCode)
+        controlBuffer.push(keyCode);
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function keySpaceHandler() {
+    if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED)
+        gamePlay();
+    else if (gameState == GAME_STATE.DEAD || gameState == GAME_STATE.WON) {
+        console.log("Revival!");
+        gameIdle();
+    }
+    else
+        gamePause();
 }
 
 /*====================*/
