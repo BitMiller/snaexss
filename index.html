@@ -63,21 +63,23 @@
 > https://unicode-explorer.com/list/arrows
 -->
             <table id="id_tb_controlButtons">
-                <tr>
-                    <td></td>
-                    <td><button class="cl_arrowButton" onclick="keyDirectionsHandler('ArrowUp')">&#x21E7;</button></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><button class="cl_arrowButton" onclick="keyDirectionsHandler('ArrowLeft')">&#x21E6;</button></td>
-                    <td><button class="cl_spaceButton" onclick="keySpaceHandler()"><!--&#x2423;-->Space</button></td>
-                    <td><button class="cl_arrowButton" onclick="keyDirectionsHandler('ArrowRight')">&#x21E8;</button></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button class="cl_arrowButton" onclick="keyDirectionsHandler('ArrowDown')">&#x21E9;</button></td>
-                    <td></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowUp')">&#x21E7;</button></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowLeft')">&#x21E6;</button></td>
+                        <td><button class="cl_spaceButton" onmousedown="keySpaceHandler()"><!--&#x2423;-->Space</button></td>
+                        <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowRight')">&#x21E8;</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowDown')">&#x21E9;</button></td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table> <!-- id_tb_controlButtons -->
         </div>
 
