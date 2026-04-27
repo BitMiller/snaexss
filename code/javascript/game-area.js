@@ -24,9 +24,11 @@ function generateGameArea(elementAttachTo) {
 
     let newTable = document.createElement("table");
     newTable.classList.add("cl_positionAbsolute", "cl_gameArea");
-    newTable.style.tableLayout = "fixed";
+    /*newTable.style.tableLayout = "fixed";*/
     /*newTable.style.width = (gridSize*(xSize+6))+"px";
     newTable.style.height = (gridSize*(ySize+6))+"px";*/
+
+    let newTbody = document.createElement("tbody");
 
     for (let j = 0; j < ySize; j++) {
         let newTr = document.createElement("tr");
@@ -39,8 +41,10 @@ function generateGameArea(elementAttachTo) {
             gameArea[i][j].element = newTd;
         }
 
-        newTable.appendChild(newTr);
+        newTbody.appendChild(newTr);
     }
+
+    newTable.appendChild(newTbody);
 
     let tableOverlay1 = newTable.cloneNode(true);
     //tableOverlay1.style.background = "#f005";
@@ -49,10 +53,10 @@ function generateGameArea(elementAttachTo) {
     elementAttachTo.appendChild(newTable);
 
     tableOverlay1.id = "id_tb_gameAreaOverlay1";
-    elementAttachTo.appendChild(tableOverlay1);
+    //elementAttachTo.appendChild(tableOverlay1);
 
-    newTable = document.createElement("table");
-    elementAttachTo.appendChild(newTable);
+    /*newTable = document.createElement("table");
+    elementAttachTo.appendChild(newTable);*/
 
 }
 
