@@ -29,6 +29,9 @@
 > Extra layer between different input sources and game control:
  > https://chatgpt.com/c/69ef1834-5370-8329-999a-fd7857af0d1a : war
 
+
+> &#x2423; = [Space] symbol
+
 -->
 
 <html lang="hu">
@@ -48,14 +51,24 @@
 	<body>
 
         <div id="id_gameContainer">
+            <div id="id_gameStats">
+                <table id="id_tb_gameStats">
+                    <tbody>
+                        <tr>
+                            <td><span>Alma: <span id="id_appleCounter">0</span></span></td>
+                            <td><span>Méreg: <span id="id_poisonCounter">0</span></span></td>
+                            <td><span>Lépések: <span id="id_stepCounter">0</span></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div id="id_gameAreaContainer"></div>
             <div id="id_controlPanel">
-                <button onclick="gamePlay()">Játék!</button>
-                <button onclick="gamePause()">Sztoj</button>
-                <button onclick="gameIdle()">Újrakezdés</button>
-                <span>&nbsp;Alma: <span id="id_appleCounter">0</span> |</span>
-                <span>&nbsp;Méreg: <span id="id_poisonCounter">0</span> |</span>
-                <span>&nbsp;Lépések: <span id="id_stepCounter">0</span></span>
+                <button class="cl_gameButton" onclick="gamePlay()">Játék!</button>
+                <button class="cl_gameButton" onclick="gamePause()">Sztoj</button>
+                <button class="cl_gameButton" onclick="gameIdle()">Újrakezd</button>
+                <button class="cl_gameButton" onclick="">Útmutató</button>
+                <button class="cl_gameButton" onclick="">Ranglista</button>
             </div>
 <!--
 > https://chatgpt.com/c/69ef1626-2a00-8330-9bdc-435f93ea48c3 : war
@@ -71,7 +84,7 @@
                     </tr>
                     <tr>
                         <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowLeft')">&#x21E6;</button></td>
-                        <td><button class="cl_spaceButton" onmousedown="keySpaceHandler()"><!--&#x2423;-->Space</button></td>
+                        <td><button class="cl_spaceButton" onmousedown="keySpaceHandler()">Space</button></td>
                         <td><button class="cl_arrowButton" onmousedown="keyDirectionsHandler('ArrowRight')">&#x21E8;</button></td>
                     </tr>
                     <tr>
@@ -85,7 +98,7 @@
 
         <script type="text/javascript" src="code/javascript/constants.js"></script>
         <script type="text/javascript" src="code/javascript/elem-vars.js"></script>
-        <script type="text/javascript" src="code/javascript/area-types.js"></script>
+        <script type="text/javascript" src="code/javascript/colors.js"></script>
         <script type="text/javascript" src="code/javascript/game-area.js"></script>
         <script type="text/javascript" src="code/javascript/snake.js"></script>
         <script type="text/javascript" src="code/javascript/key-handling.js"></script>

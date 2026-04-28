@@ -127,7 +127,11 @@ function snakeStep() {
         snakeDie();
     }
     else if (isPosition(nextPosition.x, nextPosition.y, TYPE.SNAKE_BODY)) {
-        console.log("Game over - Suicide!");
+        //console.log(`snakeBodyHitPosition(nextPosition): ${snakeBodyHitPosition(nextPosition)}`);
+        if (snakeBodyHitPosition(nextPosition) >= snake.body.length - 2)
+            console.log("Game over - SuASScide!");
+        else
+            console.log("Game over - Suicide!");
         snakeSuicide();
     }
     else {
@@ -186,4 +190,25 @@ function snakeSuicide() {
     drawGameArea();
 }
 
+/*====================*/
+/*====================*/
+/*====================*/
+
+//> https://stackoverflow.com/questions/3390396/how-can-i-check-for-undefined-in-javascript
+
+function snakeBodyHitPosition(chkPos) {
+
+    if (typeof chkPos.x === "undefined" || typeof chkPos.y === "undefined") {
+        console.error(`snakeBodyHitPosition(): chkPos: incorrect input type!`);
+        return -1;
+    }
+
+    let i = 0;
+    while (i < snake.body.length && (chkPos.x != snake.body[i].x || chkPos.y != snake.body[i].y))
+        i++;
+
+    if (i < snake.body.length)
+        return i;
+    return -1;
+}
 

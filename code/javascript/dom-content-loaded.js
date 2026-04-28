@@ -14,9 +14,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("Window focus is back.");
     });
 
-    e_gameAreaContainer.style.width = (gridSize*(xSize+6))+"px";
-    e_gameAreaContainer.style.height = (gridSize*(ySize+6))+"px";
-
     gameIdle();
 
 });

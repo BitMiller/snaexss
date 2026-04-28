@@ -22,41 +22,29 @@ function generateGameArea(elementAttachTo) {
         }
     }
 
-    let newTable = document.createElement("table");
-    newTable.classList.add("cl_positionAbsolute", "cl_gameArea");
-    /*newTable.style.tableLayout = "fixed";*/
-    /*newTable.style.width = (gridSize*(xSize+6))+"px";
-    newTable.style.height = (gridSize*(ySize+6))+"px";*/
+    let newDivGameArea = document.createElement("div");
+    newDivGameArea.id = "id_blackoutArea";
+    //elementAttachTo.appendChild(newDivGameArea);
 
-    let newTbody = document.createElement("tbody");
+    newDivGameArea = document.createElement("div");
+    newDivGameArea.classList.add("cl_positionAbsolute", "cl_gameArea");
 
     for (let j = 0; j < ySize; j++) {
-        let newTr = document.createElement("tr");
-
         for (let i = 0; i < xSize; i++) {
-            let newTd = document.createElement("td");
-            /*newTd.style.width = gridSize+"px";
-            newTd.style.height = gridSize+"px";*/
-            newTr.appendChild(newTd);
-            gameArea[i][j].element = newTd;
+            let newDivGameCell = document.createElement("div");
+            newDivGameArea.appendChild(newDivGameCell);
+            gameArea[i][j].element = newDivGameCell;
         }
-
-        newTbody.appendChild(newTr);
     }
 
-    newTable.appendChild(newTbody);
+    let tableOverlay1 = newDivGameArea.cloneNode(true);
+    tableOverlay1.style.background = "#f005";
 
-    let tableOverlay1 = newTable.cloneNode(true);
-    //tableOverlay1.style.background = "#f005";
+    newDivGameArea.id = "id_mainGameArea";
+    elementAttachTo.appendChild(newDivGameArea);
 
-    newTable.id = "id_tb_gameArea";
-    elementAttachTo.appendChild(newTable);
-
-    tableOverlay1.id = "id_tb_gameAreaOverlay1";
+    tableOverlay1.id = "id_gameAreaOverlay1";
     //elementAttachTo.appendChild(tableOverlay1);
-
-    /*newTable = document.createElement("table");
-    elementAttachTo.appendChild(newTable);*/
 
 }
 
