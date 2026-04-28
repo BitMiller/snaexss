@@ -396,12 +396,12 @@ function gameIdle() {
     gameState = GAME_STATE.IDLE;
     snakeFreeze = false;
     stopAnimation();
-    healPoison();
     e_appleCounter.innerHTML = 0;
     e_poisonCounter.innerHTML = 0;
     e_stepCounter.innerHTML = 0;
 
     generateGameArea(e_gameAreaContainer);
+    healPoison();
 
     for (let i = 0; i < 10; i++)
         spawnPoisonedApple();
