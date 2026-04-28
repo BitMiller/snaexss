@@ -11,6 +11,12 @@ let e_poisonCounter = document.getElementById("id_poisonCounter");
 
 let e_stepCounter = document.getElementById("id_stepCounter");
 
+let e_blackoutArea;
+
+let e_mainGameArea;
+
+let e_gameAreaOverlay1;
+
 /*
 
 let e_ = document.getElementById("id_");

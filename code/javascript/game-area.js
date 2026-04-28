@@ -23,10 +23,6 @@ function generateGameArea(elementAttachTo) {
     }
 
     let newDivGameArea = document.createElement("div");
-    newDivGameArea.id = "id_blackoutArea";
-    //elementAttachTo.appendChild(newDivGameArea);
-
-    newDivGameArea = document.createElement("div");
     newDivGameArea.classList.add("cl_positionAbsolute", "cl_gameArea");
 
     for (let j = 0; j < ySize; j++) {
@@ -37,14 +33,27 @@ function generateGameArea(elementAttachTo) {
         }
     }
 
-    let tableOverlay1 = newDivGameArea.cloneNode(true);
-    tableOverlay1.style.background = "#f005";
+    let newDivGameAreaOverlay1 = newDivGameArea.cloneNode(true);
+    newDivGameAreaOverlay1.style.background = "#f005";
 
     newDivGameArea.id = "id_mainGameArea";
+    newDivGameArea.style.padding = "1vh";
     elementAttachTo.appendChild(newDivGameArea);
+    e_mainGameArea = newDivGameArea;
 
-    tableOverlay1.id = "id_gameAreaOverlay1";
-    //elementAttachTo.appendChild(tableOverlay1);
+    newDivGameAreaOverlay1.id = "id_gameAreaOverlay1";
+    //elementAttachTo.appendChild(newDivGameAreaOverlay1);
+    //e_gameAreaOverlay1 = newDivGameAreaOverlay1;
+
+    newDivGameArea = document.createElement("div");
+    newDivGameArea.id = "id_blackoutArea";
+    elementAttachTo.appendChild(newDivGameArea);
+    e_blackoutArea = newDivGameArea;
+
+    newDivGameArea = document.createElement("div");
+    newDivGameArea.id = "id_gameAreaFrame";
+    elementAttachTo.appendChild(newDivGameArea);
+    //e_blackoutArea = newDivGameArea;
 
 }
 
@@ -387,6 +396,7 @@ function gameIdle() {
     gameState = GAME_STATE.IDLE;
     snakeFreeze = false;
     stopAnimation();
+    healPoison();
     e_appleCounter.innerHTML = 0;
     e_poisonCounter.innerHTML = 0;
     e_stepCounter.innerHTML = 0;

@@ -14,6 +14,13 @@ Snake direction:
 
 let snakeFreeze = false;
 
+let poisonCountDown = 0;
+let poisonHitCountDown = 0;
+const POISON_INTERVAL = 10;
+const POISON_HIT_INTERVAL = 5;
+const POISON_CLEAR_INTERVAL = 5;
+let poisonOverkill = false;
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -124,6 +131,7 @@ function snakeStep() {
 
     if (isOutPosition(nextPosition.x, nextPosition.y)) {
         console.log("Game over");
+        healPoison();
         snakeDie();
     }
     else if (isPosition(nextPosition.x, nextPosition.y, TYPE.SNAKE_BODY)) {
@@ -132,9 +140,11 @@ function snakeStep() {
             console.log("Game over - SuASScide!");
         else
             console.log("Game over - Suicide!");
+        healPoison();
         snakeSuicide();
     }
     else {
+        checkPoison();
         e_stepCounter.innerHTML = parseInt(e_stepCounter.innerHTML)+1;
         newBody.push(nextPosition);
 
@@ -145,6 +155,7 @@ function snakeStep() {
         }
         else if (isPosition(nextPosition.x, nextPosition.y, TYPE.POISON)) {
             e_poisonCounter.innerHTML = parseInt(e_poisonCounter.innerHTML)+1;
+            snakeAtePoison();
         }
 
         if (grow) {
@@ -212,3 +223,52 @@ function snakeBodyHitPosition(chkPos) {
     return -1;
 }
 
+/*====================*/
+/*====================*/
+/*====================*/
+
+function snakeAtePoison() {
+    if (poisonCountDown > 0)
+        poisonOverkill = true;
+    poisonCountDown += POISON_INTERVAL;
+    poisonHitCountDown = POISON_HIT_INTERVAL;
+    e_blackoutArea.classList.add("blurred");
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function checkPoison() {
+    console.log(`poisonCountDown: ${poisonCountDown}`);
+    if (poisonCountDown == 0) {
+        if (poisonOverkill)
+            poisonOverkill = false;
+        healPoison();
+        return;
+    }
+
+    let color = {
+        x: 0,
+        y: 0,
+        z: 0,
+        a: 0
+    };
+
+
+
+    poisonCountDown--;
+    if (poisonHitCountDown > 0)
+        poisonHitCountDown--;
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function healPoison() {
+    e_blackoutArea.classList.remove("blurred");
+    poisonCountDown = 0;
+    poisonHitCountDown = 0;
+    poisonOverkill = false;
+}

@@ -21,12 +21,18 @@ let areaTypes = {
 4: "#22c", //> SNAKE_BODY
 */
 
-2: "#0ff", //> POISON
-3: "rgb(173, 241, 127)", //> SNAKE_HEAD
-4: "rgb(38, 236, 20)", //> SNAKE_BODY
+//2: "#0ff", //> POISON
+2: "rgb(27, 255, 225)", //> POISON
 
+3: "rgb(26, 180, 12)", //> SNAKE_HEAD
+4: "rgb(108, 243, 19)", //> SNAKE_BODY
+
+5: "rgb(128, 26, 128)", //> SNAKE_HEAD_DEAD
+6: "rgb(206, 7, 206)", //> SNAKE_BODY_DEAD
+/*
 5: "#a4a", //> SNAKE_HEAD_DEAD
 6: "#727", //> SNAKE_BODY_DEAD
+*/
 1000: "#222", //> SNAKE_SPAWN_POINT_TEST
 9999: "outArea", //> OUT_AREA
 };
