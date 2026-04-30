@@ -1,4 +1,20 @@
 
+let e_hiScores = document.getElementById("id_hiScores");
+
+let e_hiScoreList = document.getElementById("id_hiScoreList");
+
+let e_description = document.getElementById("id_description");
+
+let e_bt_toggleHiScores = document.getElementById("id_bt_toggleHiScores");
+
+let e_bt_toggleHiScoresInner = document.getElementById("id_bt_toggleHiScoresInner");
+
+let e_bt_toggleDescription = document.getElementById("id_bt_toggleDescription");
+
+let e_bt_toggleDescriptionInner = document.getElementById("id_bt_toggleDescriptionInner");
+
+
+
 let e_keyPresses = document.getElementById("id_keyPresses");
 
 let e_gameContainer = document.getElementById("id_gameContainer");

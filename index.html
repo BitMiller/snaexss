@@ -50,6 +50,19 @@
 
 	<body>
 
+        <div id="id_hiScores" class="cl_displayNone">
+            <h3>~ Rangtábla ~</h3>
+            <div id="id_hiScoreList"></div>
+            <button id="id_bt_toggleHiScoresInner">Rendben</button>
+        </div>
+
+        <div id="id_description" class="cl_displayNone">
+            <h3>~ Útmutató ~</h3>
+            <p>[Space] [iránygombok]</p>
+            <p></p>
+            <button id="id_bt_toggleDescriptionInner">Ércsem</button>
+        </div>
+
         <div id="id_gameContainer">
             <div id="id_gameStats">
                 <table id="id_tb_gameStats">
@@ -67,8 +80,8 @@
                 <button class="cl_gameButton" onclick="gamePlay()">Játék!</button>
                 <button class="cl_gameButton" onclick="gamePause()">Sztoj</button>
                 <button class="cl_gameButton" onclick="gameIdle()">Újrakezd</button>
-                <button class="cl_gameButton" onclick="">Útmutató</button>
-                <button class="cl_gameButton" onclick="">Ranglista</button>
+                <button id="id_bt_toggleDescription" class="cl_gameButton">Útmutató</button>
+                <button id="id_bt_toggleHiScores" class="cl_gameButton">Ranglista</button>
             </div>
 <!--
 > https://chatgpt.com/c/69ef1626-2a00-8330-9bdc-435f93ea48c3 : war

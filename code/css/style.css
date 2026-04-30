@@ -85,6 +85,10 @@ body {
     backdrop-filter: blur(5px);
 }
 
+.cl_displayNone {
+    display: none;
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -124,6 +128,10 @@ body {
 #id_gameAreaOverlay1 div {
     box-sizing: content-box;
     /*border: 1px solid green;*/
+}
+
+#id_tb_controlButtons {
+    display: none;
 }
 
 #id_tb_controlButtons button {
@@ -176,3 +184,26 @@ body {
     border-style: ridge;
     box-shadow: 0 0 3px 3px #000a, inset 0 0 3px 3px #fff7;
 }
+
+#id_hiScores {
+    position: fixed;
+}
+
+#id_description {
+    position: fixed;
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+@media (pointer: coarse) {
+    #id_tb_controlButtons {
+        display: block;
+    }
+}
+
+
+
+
+
