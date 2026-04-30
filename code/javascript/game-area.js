@@ -420,8 +420,7 @@ function gameIdle() {
 /*====================*/
 
 function gamePlay() {
-//> Start animation (seInterval / reqAnimFrame)
-    if (gameState != GAME_STATE.PLAYING) {
+    if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED) {
         gameState = GAME_STATE.PLAYING;
         startAnimation();
     }
@@ -432,8 +431,10 @@ function gamePlay() {
 /*====================*/
 
 function gamePause() {
-    gameState = GAME_STATE.PAUSED;
-    stopAnimation();
+    if (gameState == GAME_STATE.PLAYING) {
+        gameState = GAME_STATE.PAUSED;
+        stopAnimation();
+    }
 }
 
 /*====================*/
@@ -461,6 +462,7 @@ function gameDead() {
 /*====================*/
 
 function gameWon() {
+    healPoison();
     gameState = GAME_STATE.WON;
     snakeFreeze = true;
     //stopAnimation();

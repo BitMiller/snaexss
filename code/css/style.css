@@ -69,7 +69,7 @@ body {
 .cl_gameButton {
     width: 9vh;
     height: 4vh;
-    font-size: 2vh;
+    font-size: 1.8vh;
 
     margin: 0.4vh;
     padding: 0;
@@ -81,12 +81,50 @@ body {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
-.blurred {
-    backdrop-filter: blur(5px);
-}
-
 .cl_displayNone {
     display: none;
+}
+
+.cl_grid-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.2vh;
+
+    height: 30vh;
+    aspect-ratio: 1;
+
+    /*border: 3px solid red;*/
+}
+
+.cl_button-100pctFill {
+    width: 100%;
+    height: 100%;
+}
+
+.cl_center {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.cl_top {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.cl_right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.cl_bottom {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.cl_left {
+    grid-column: 1;
+    grid-row: 2;
 }
 
 /*====================*/
@@ -132,11 +170,14 @@ body {
 
 #id_tb_controlButtons {
     display: none;
+    table-layout: fixed;
+    width: 30vh;
+    aspect-ratio: 7;
 }
 
 #id_tb_controlButtons button {
-    width: 10vh;
-    height: 10vh;
+    width: 100%;
+    height: 100%;
     /*color: red;*/
     font-weight: bold;
 }
@@ -153,8 +194,19 @@ body {
     height: 48vh;
     aspect-ratio: 1;
 
-    background-color: #0000;
+    background-color: rgba(0, 80, 94, 0.6);
     border-radius: 2vh;
+
+    pointer-events: none;
+
+    opacity: 0;
+    backdrop-filter: none;
+    transition: opacity 0.3s, backdrop-filter 0.5s;
+}
+
+#id_blackoutArea.active {
+    opacity: 1;
+    backdrop-filter: blur(10px);
 }
 
 #id_tb_gameStats {
@@ -182,6 +234,7 @@ body {
 
     border: 6px solid brown;
     border-style: ridge;
+    border-radius: 2vh;
     box-shadow: 0 0 3px 3px #000a, inset 0 0 3px 3px #fff7;
 }
 
@@ -191,6 +244,29 @@ body {
 
 #id_description {
     position: fixed;
+}
+
+#id_overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    opacity: 0;
+    backdrop-filter: none;
+    transition: opacity 0.5s, backdrop-filter 0.5s;
+
+    pointer-events: none;
+}
+
+#id_overlay.active {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+
+    pointer-events: auto;
 }
 
 /*====================*/

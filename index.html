@@ -50,21 +50,9 @@
 
 	<body>
 
-        <div id="id_hiScores" class="cl_displayNone">
-            <h3>~ Rangtábla ~</h3>
-            <div id="id_hiScoreList"></div>
-            <button id="id_bt_toggleHiScoresInner">Rendben</button>
-        </div>
-
-        <div id="id_description" class="cl_displayNone">
-            <h3>~ Útmutató ~</h3>
-            <p>[Space] [iránygombok]</p>
-            <p></p>
-            <button id="id_bt_toggleDescriptionInner">Ércsem</button>
-        </div>
-
         <div id="id_gameContainer">
             <div id="id_gameStats">
+
                 <table id="id_tb_gameStats">
                     <tbody>
                         <tr>
@@ -73,22 +61,27 @@
                             <td><span>Lépések: <span id="id_stepCounter">0</span></span></td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
+                </table> <!-- id_tb_gameStats -->
+
+
+            </div> <!-- id_gameStats -->
+
             <div id="id_gameAreaContainer"></div>
+
             <div id="id_controlPanel">
                 <button class="cl_gameButton" onclick="gamePlay()">Játék!</button>
                 <button class="cl_gameButton" onclick="gamePause()">Sztoj</button>
                 <button class="cl_gameButton" onclick="gameIdle()">Újrakezd</button>
                 <button id="id_bt_toggleDescription" class="cl_gameButton">Útmutató</button>
                 <button id="id_bt_toggleHiScores" class="cl_gameButton">Ranglista</button>
-            </div>
+            </div> <!-- id_controlPanel -->
 <!--
 > https://chatgpt.com/c/69ef1626-2a00-8330-9bdc-435f93ea48c3 : war
 
 > https://unicode-explorer.com/list/arrows
 -->
-            <table id="id_tb_controlButtons">
+
+            <!--<table id="id_tb_controlButtons">
                 <tbody>
                     <tr>
                         <td></td>
@@ -106,8 +99,34 @@
                         <td></td>
                     </tr>
                 </tbody>
-            </table> <!-- id_tb_controlButtons -->
-        </div>
+            </table>--> <!-- id_tb_controlButtons -->
+
+            <div id="id_tb_controlButtons" class="cl_grid-3x3">
+                <button class="cl_arrowButton cl_top" onmousedown="keyDirectionsHandler('ArrowUp')">&#x21E7;</button>
+                <button class="cl_arrowButton cl_left" onmousedown="keyDirectionsHandler('ArrowLeft')">&#x21E6;</button>
+                <button class="cl_spaceButton cl_center" onmousedown="keySpaceHandler()">Space</button>
+                <button class="cl_arrowButton cl_right" onmousedown="keyDirectionsHandler('ArrowRight')">&#x21E8;</button>
+                <button class="cl_arrowButton cl_bottom" onmousedown="keyDirectionsHandler('ArrowDown')">&#x21E9;</button>
+            </div>
+
+
+        </div> <!-- id_gameContainer -->
+
+        <div id="id_overlay">
+            <div id="id_description" class="cl_displayNone">
+                <h3>~ Útmutató ~</h3>
+                <p>[Space] [iránygombok]</p>
+                <p></p>
+                <button id="id_bt_toggleDescriptionInner">Ércsem</button>
+            </div> <!-- id_description -->
+
+            <div id="id_hiScores" class="cl_displayNone">
+                <h3>~ Ranglista ~</h3>
+                <div id="id_hiScoreList"></div>
+                <button id="id_bt_toggleHiScoresInner">Rendics</button>
+            </div> <!-- id_hiScores -->
+        </div> <!-- id_overlay -->
+
 
         <script type="text/javascript" src="code/javascript/constants.js"></script>
         <script type="text/javascript" src="code/javascript/elem-vars.js"></script>

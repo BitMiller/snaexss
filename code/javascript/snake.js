@@ -131,7 +131,6 @@ function snakeStep() {
 
     if (isOutPosition(nextPosition.x, nextPosition.y)) {
         console.log("Game over");
-        healPoison();
         snakeDie();
     }
     else if (isPosition(nextPosition.x, nextPosition.y, TYPE.SNAKE_BODY)) {
@@ -140,7 +139,6 @@ function snakeStep() {
             console.log("Game over - SuASScide!");
         else
             console.log("Game over - Suicide!");
-        healPoison();
         snakeSuicide();
     }
     else {
@@ -186,6 +184,7 @@ function snakeStep() {
 function snakeDie() {
     gameState = GAME_STATE.DEAD;
     stopAnimation();
+    healPoison();
     drawDeadSnake();
     drawGameArea();
 }
@@ -197,6 +196,7 @@ function snakeDie() {
 function snakeSuicide() {
     gameState = GAME_STATE.DEAD;
     stopAnimation();
+    healPoison();
     drawDeadSnake();
     drawGameArea();
 }
@@ -232,7 +232,7 @@ function snakeAtePoison() {
         poisonOverkill = true;
     poisonCountDown += POISON_INTERVAL;
     poisonHitCountDown = POISON_HIT_INTERVAL;
-    e_blackoutArea.classList.add("blurred");
+    e_blackoutArea.classList.add("active");
 }
 
 /*====================*/
@@ -240,7 +240,7 @@ function snakeAtePoison() {
 /*====================*/
 
 function checkPoison() {
-    console.log(`poisonCountDown: ${poisonCountDown}`);
+    //console.log(`poisonCountDown: ${poisonCountDown}`);
     if (poisonCountDown == 0) {
         if (poisonOverkill)
             poisonOverkill = false;
@@ -267,7 +267,7 @@ function checkPoison() {
 /*====================*/
 
 function healPoison() {
-    e_blackoutArea.classList.remove("blurred");
+    e_blackoutArea.classList.remove("active");
     poisonCountDown = 0;
     poisonHitCountDown = 0;
     poisonOverkill = false;
