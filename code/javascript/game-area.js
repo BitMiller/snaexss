@@ -37,7 +37,7 @@ function generateGameArea(elementAttachTo) {
     newDivGameAreaOverlay1.style.background = "#f005";
 
     newDivGameArea.id = "id_mainGameArea";
-    newDivGameArea.style.padding = "1vh";
+    //newDivGameArea.style.padding = "1vh";
     elementAttachTo.appendChild(newDivGameArea);
     e_mainGameArea = newDivGameArea;
 

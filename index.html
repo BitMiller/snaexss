@@ -3,7 +3,7 @@
 #Created @260421-2-1900
 
 > URL.Android: http://localhost:8080/Dropbox/WhiteAndRoll/webprogs/_games/snaexss/git/index.html
-> URL.Leni: http://localhost/Dropbox/WhiteAndRoll/webprogs/_games/snaexss/git/index.html
+> URL.Leni/swPC: http://localhost/Dropbox/WhiteAndRoll/webprogs/_games/snaexss/git/index.html
 
 > Title: Snaexss - comes from plural of "Snake", with a little spice
 
@@ -24,13 +24,19 @@
 > Keypress handler:
  > https://chatgpt.com/c/69e75dc6-6e14-8329-a136-867acb66b82f : war
 
-> https://www.toptal.com/developers/keycode
+> Keycode shower:
+ > https://www.toptal.com/developers/keycode
 
 > Extra layer between different input sources and game control:
  > https://chatgpt.com/c/69ef1834-5370-8329-999a-fd7857af0d1a : war
 
 
 > &#x2423; = [Space] symbol
+
+
+> SGA52 Opera
+ > window.innerWidth == 411
+ > window.innerHeight == 720
 
 -->
 
@@ -42,6 +48,8 @@
 		<meta http-equiv="Expires" content="0">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+        <!--<script type="text/javascript" src="code/thirdparty/mobile-console-main_v2/hnl.mobileconsole.min.js"></script>-->
+
 		<title>Snaexss...</title>
 
 		<link rel="stylesheet" type="text/css" href="code/css/style.css">
@@ -51,6 +59,7 @@
 	<body>
 
         <div id="id_gameContainer">
+            <div id="id_nameLine">~&nbsp;<span id="id_playerName"></span>&nbsp;~</div>
             <div id="id_gameStats">
 
                 <table id="id_tb_gameStats">
@@ -113,34 +122,57 @@
         </div> <!-- id_gameContainer -->
 
         <div id="id_overlay">
-            <div id="id_description" class="cl_displayNone">
-                <h3>~ Útmutató ~</h3>
-                <p>[Space] [iránygombok]</p>
-                <p></p>
-                <button id="id_bt_toggleDescriptionInner">Ércsem</button>
+
+            <div id="id_welcomePlayer" class="cl_floater cl_displayFlex cl_displayNone">
+                <span>Üdv, <span id="id_sp_playerName"></span>!</span>
+            </div> <!-- id_welcomePlayer -->
+
+            <div id="id_setPlayerName" class="cl_displayFlex cl_displayNone">
+                <h3>Üdv Néked, Idegen!</h3>
+                <p>Ne játssz az idegen,</p>
+                <p>Írd meg a neve... den.</p>
+                <!--<h3>Hello, Complete Stranger!</h3>
+                <p>Introduce thy name!</p>-->
+                <input type="text" id="id_playerNameInput">
+                <button type="button" id="id_bt_playerName">Így jó is lesz.</button>
+            </div> <!-- id_setPlayerName -->
+
+            <div id="id_description" class="cl_floater cl_displayFlex cl_displayNone">
+                <h3 class="cl_textAlignCenter">~ Útmutató ~</h3>
+                <h4>Irányítás:</h4>
+                <p>- [Space] / [Enter] : Játék indítása, megállítása, halál esetén újrakezdése</p>
+                <p>- [Iránygombok] : A kukac irányítása</p>
+                <h4>Játékszabály:</h4>
+                <p>- A piros almákból kell 20 db-ot összegyűjteni a csodás pillangóvá váláshoz.</p>
+                <p>- A cián színű körök a permet az almákon, az lemérgezi a kukacot, ami x időre zavarja a látását.<br>
+                Ha fogyaszt belőle, a mérgezési idő az előzőhöz hozzáadódik.</p>
+                <p>- Ha egy alma megevésre kerül, új terem, ciánostul. A megevett alma mérge megmarad, és a kukac hossza is eggyel nő.</p>
+                <p>- A játék csak akkor sikeres, ha a 20 alma összegyűlik. A végső pontszám majd abból adódik, hogy milyen kevés lépés és méreg elfogyasztásával sikerült végigvinni a csetlő-botló-bolyongó kukac-létet.</p>
+                <button id="id_bt_toggleDescriptionInner" class="cl_textAlignCenter">Ércsem</button>
             </div> <!-- id_description -->
 
-            <div id="id_hiScores" class="cl_displayNone">
-                <h3>~ Ranglista ~</h3>
+            <div id="id_hiScores" class="cl_floater cl_displayFlex cl_displayNone">
+                <h3 class="cl_textAlignCenter">~ Ranglista ~</h3>
                 <div id="id_hiScoreList"></div>
-                <button id="id_bt_toggleHiScoresInner">Rendics</button>
+                <button id="id_bt_toggleHiScoresInner" class="cl_textAlignCenter">Rendics</button>
             </div> <!-- id_hiScores -->
+
         </div> <!-- id_overlay -->
 
 
         <script type="text/javascript" src="code/javascript/constants.js"></script>
+        <script type="text/javascript" src="code/javascript/cookies.js"></script>
+        <script type="text/javascript" src="code/javascript/global-vars.js"></script>
         <script type="text/javascript" src="code/javascript/elem-vars.js"></script>
         <script type="text/javascript" src="code/javascript/colors.js"></script>
         <script type="text/javascript" src="code/javascript/game-area.js"></script>
+        <script type="text/javascript" src="code/javascript/floaters.js"></script>
         <script type="text/javascript" src="code/javascript/snake.js"></script>
         <script type="text/javascript" src="code/javascript/key-handling.js"></script>
         <script type="text/javascript" src="code/javascript/animation.js"></script>
         <script type="text/javascript" src="code/javascript/dom-content-loaded.js"></script>
 
         <script>
-
-
-
 
         </script>
 

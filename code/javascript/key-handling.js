@@ -10,14 +10,17 @@ const directionKeys = [
     "ArrowLeft"
 ];
 
+let wasPlayingBeforeMenu = false;
+
+let captureGameKeys = true;
+
 let gameState = GAME_STATE.IDLE;
 
 const combos = [
-    ["KeyF"], //> Test
-    ["ControlLeft", "KeyF"], //> Test
     ["F11"], //> Full Screen
     ["F12"], //> Dev Tools
-    ["ControlLeft", "ShiftLeft", "KeyR"] //> Full Reload Page
+    ["ControlLeft", "ShiftLeft", "KeyR"], //> Full Reload Page on Win
+    ["MetaLeft", "ShiftLeft", "KeyR"], //> Full Reload Page on Mac
 ];
 
 /*====================*/
@@ -25,6 +28,9 @@ const combos = [
 /*====================*/
 
 function keyDownHandler(event) {
+    if (!captureGameKeys)
+        return;
+
     if (!pressedKeys.has(event.code)) {
         pressedKeys.add(event.code);
     }
@@ -39,7 +45,7 @@ function keyDownHandler(event) {
         keyDirectionsHandler(event.code);
     }
 
-    if (event.code == "Space") {
+    if (event.code == "Space" || event.code == "Enter") {
         keySpaceHandler();
     }
 }
@@ -77,7 +83,7 @@ function keySpaceHandler() {
         console.log("Revival!");
         gameIdle();
     }
-    else
+    else //> if (gameState == GAME_STATE.PLAYING)
         gamePause();
 }
 
@@ -112,4 +118,21 @@ function isComboPressed(combo = []) {
 
     return match;
 
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function disableGameKeysCapture() {
+    captureGameKeys = false;
+    pressedKeys.clear();
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function enableGameKeysCapture() {
+    captureGameKeys = true;
 }

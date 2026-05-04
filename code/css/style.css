@@ -5,6 +5,10 @@ Font discussion:
 > https://chatgpt.com/c/69f0f87c-db58-83eb-bb53-21492ab8d062 : war
 */
 
+:root {
+    --mobile-gui-multiplier: 0.85;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -21,6 +25,8 @@ body {
     background-repeat: no-repeat;
 
     font-family: "Comic Sans MS", "Comic Sans", cursive;
+
+    user-select: none;
 }
 
 /*====================*/
@@ -38,18 +44,20 @@ body {
 }
 
 .cl_arrowButton {
-    font-size: 7vh;
+    font-size: 6vh;
 
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .cl_gameArea {
-    position: absolute;
+    /*position: absolute;*/
     display: grid;
     grid-template-columns: repeat(20, 1fr);
 
     width: 100%;
     aspect-ratio: 1;
+
+    padding: 1vh;
 
     /*box-sizing: content-box;*/
     box-sizing: border-box;
@@ -70,8 +78,8 @@ body {
     width: 9vh;
     height: 4vh;
     font-size: 1.8vh;
-
     margin: 0.4vh;
+
     padding: 0;
 
     display: flex;
@@ -81,12 +89,16 @@ body {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
+.cl_displayFlex {
+    display: flex;
+}
+
 .cl_displayNone {
     display: none;
 }
 
 .cl_grid-3x3 {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 0.2vh;
@@ -127,6 +139,30 @@ body {
     grid-row: 2;
 }
 
+.cl_textAlignCenter {
+    text-align: center;
+    /*margin: 0 auto;*/
+}
+
+.cl_floater {
+    position: fixed;
+    /*display: flex;*/
+    /*align-items: center;*/
+    justify-content: center;
+    flex-direction: column;
+
+    width: 90vw;
+    height: 90vh;
+    padding: 2vh;
+
+    border: 2px solid #0007;
+    border-radius: 2vh;
+
+    color: black;
+    background-color: #fff5;
+    font-size: 1.5vh;
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -155,9 +191,9 @@ body {
 
     height: 48vh;
     aspect-ratio: 1;
+    margin: 2vh;
 
     /*border: 1px solid red;*/
-    margin: 2vh;
 }
 
 #id_mainGameArea {
@@ -169,15 +205,16 @@ body {
 }
 
 #id_tb_controlButtons {
-    display: none;
+    /*display: none;*/
     table-layout: fixed;
-    width: 30vh;
-    aspect-ratio: 7;
+    margin: 2vh;
+    /*width: 30vh;
+    aspect-ratio: 1;*/
 }
 
 #id_tb_controlButtons button {
-    width: 100%;
-    height: 100%;
+    /*width: 100%;
+    height: 100%;*/
     /*color: red;*/
     font-weight: bold;
 }
@@ -191,7 +228,8 @@ body {
 #id_blackoutArea {
     position: absolute;
 
-    height: 48vh;
+    /*height: 48vh;*/
+    width: 100%;
     aspect-ratio: 1;
 
     background-color: rgba(0, 80, 94, 0.6);
@@ -204,7 +242,7 @@ body {
     transition: opacity 0.3s, backdrop-filter 0.5s;
 }
 
-#id_blackoutArea.active {
+#id_blackoutArea.cl_active {
     opacity: 1;
     backdrop-filter: blur(10px);
 }
@@ -227,7 +265,8 @@ body {
 #id_gameAreaFrame {
     position: relative;
 
-    height: 48vh;
+    /*height: 48vh;*/
+    width: 100%;
     aspect-ratio: 1;
 
     box-sizing: content-box;
@@ -238,13 +277,15 @@ body {
     box-shadow: 0 0 3px 3px #000a, inset 0 0 3px 3px #fff7;
 }
 
+/* #FLOATERS */
+
 #id_hiScores {
-    position: fixed;
 }
 
 #id_description {
-    position: fixed;
 }
+
+/* &&&&&&& */
 
 #id_overlay {
     position: fixed;
@@ -253,7 +294,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    /*flex-direction: column;*/
 
     opacity: 0;
     backdrop-filter: none;
@@ -262,20 +303,89 @@ body {
     pointer-events: none;
 }
 
-#id_overlay.active {
+#id_overlay.cl_active {
     opacity: 1;
     backdrop-filter: blur(5px);
 
     pointer-events: auto;
 }
 
+#id_nameLine {
+    /*display: block;*/
+    color: black;
+    text-shadow: 0 0 10px white;
+    /*border: 1px solid red;*/
+    font-size: 2.5vh;
+    padding: 0.5vh 1vh;
+
+    background-color: #fff8;
+    border-radius: 1vh;
+
+    cursor: pointer;
+
+    margin: 2vh;
+}
+
+#id_bt_toggleDescriptionInner {
+    width: 14vh;
+    height: 4vh;
+    margin: 2.5vh auto;
+    /*text-align: center;*/
+    font-size: 2vh;
+}
+
+#id_setPlayerName {
+    position: fixed;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 90vw;
+    height: 40vh;
+    padding: 2vh;
+
+    border: 2px solid #0007;
+    border-radius: 2vh;
+
+    color: black;
+    background-color: #fff5;
+    font-size: 1.5vh;
+}
+
+#id_setPlayerName input {
+    margin: 2vh;
+    font-size: 2vh;
+    text-align: center;
+}
+
+#id_setPlayerName button {
+    font-size: 2vh;
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
 
-@media (pointer: coarse) {
-    #id_tb_controlButtons {
-        display: block;
+@media /*(pointer: coarse)*/ (width <= 415px) {
+    /*#id_tb_controlButtons {
+        display: unset;
+    }*/
+
+    .cl_grid-3x3 {
+        display: grid;
+    }
+
+    .cl_gameButton {
+        width: calc(9vh * var(--mobile-gui-multiplier));
+        height: calc(4vh * var(--mobile-gui-multiplier));
+        font-size: calc(1.8vh * var(--mobile-gui-multiplier));
+        margin: calc(0.4vh * var(--mobile-gui-multiplier));
+    }
+
+    #id_gameAreaContainer {
+        height: calc(48vh * var(--mobile-gui-multiplier));
+        margin: calc(2vh * var(--mobile-gui-multiplier));
     }
 }
 
