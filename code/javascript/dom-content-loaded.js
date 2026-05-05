@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     getCookies();
     if (typeof cookies.player === "undefined" || cookies.player == "") {
         //setCookie("player", "Anonymous", 1/24);
-        console.log("showSetPlayerNameFloater()");
+        //console.log("showSetPlayerNameFloater()");
         showSetPlayerNameFloater();
     }
     else {
         e_sp_playerName.innerHTML = cookies.player;
         e_playerName.innerHTML = cookies.player;
-        console.log("showWelcomeFloater()");
+        //console.log("showWelcomeFloater()");
         showWelcomeFloater();
     }
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     e_bt_toggleDescription.addEventListener("click", () => {
         e_description.classList.toggle("cl_displayNone");
         e_overlay.classList.toggle("cl_active");
-        disableGameKeysCapture();
+        keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
             keySpaceHandler();
             wasPlayingBeforeMenu = true;
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     e_bt_toggleDescriptionInner.addEventListener("click", () => {
         e_description.classList.toggle("cl_displayNone");
         e_overlay.classList.toggle("cl_active");
-        enableGameKeysCapture();
+        keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
             keySpaceHandler();
             wasPlayingBeforeMenu = false;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     e_bt_toggleHiScores.addEventListener("click", () => {
         e_hiScores.classList.toggle("cl_displayNone");
         e_overlay.classList.toggle("cl_active");
-        disableGameKeysCapture();
+        keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
             keySpaceHandler();
             wasPlayingBeforeMenu = true;
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     e_bt_toggleHiScoresInner.addEventListener("click", () => {
         e_hiScores.classList.toggle("cl_displayNone");
         e_overlay.classList.toggle("cl_active");
-        enableGameKeysCapture();
+        keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
             keySpaceHandler();
             wasPlayingBeforeMenu = false;
@@ -83,9 +83,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log(event.data);
     });
 
-    e_bt_playerName.addEventListener("click", () => {
-        setPlayerName();
+    e_bt_playerNameOK.addEventListener("click", () => {
+        playerNameOK();
     });
+
+    e_bt_playerNameCancel.addEventListener("click", () => {
+        playerNameCancel();
+    });
+
+
+
 
     gameIdle();
 

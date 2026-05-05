@@ -1,6 +1,6 @@
 
 function showSetPlayerNameFloater() {
-    disableGameKeysCapture();
+    keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_setPlayerName.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_active");
 }
@@ -10,7 +10,7 @@ function showSetPlayerNameFloater() {
 /*====================*/
 
 function hideSetPlayerNameFloater() {
-    enableGameKeysCapture();
+    keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
     e_setPlayerName.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_active");
 }
@@ -20,7 +20,7 @@ function hideSetPlayerNameFloater() {
 /*====================*/
 
 function showWelcomeFloater() {
-    disableGameKeysCapture();
+    keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_welcomePlayer.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_active");
     setTimeout(hideWelcomeFloater, 2500);
@@ -31,7 +31,7 @@ function showWelcomeFloater() {
 /*====================*/
 
 function hideWelcomeFloater() {
-    enableGameKeysCapture();
+    keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
     e_welcomePlayer.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_active");
 }
@@ -40,8 +40,29 @@ function hideWelcomeFloater() {
 /*====================*/
 /*====================*/
 
-function setPlayerName() {
-    e_sp_playerName.innerHTML = e_playerNameInput.value;
-    e_playerName.innerHTML = e_playerNameInput.value;
+function setPlayerName(name) {
+    if (name == "")
+        name = "Anonymous";
+
+    e_playerNameInput.value = name;
+    e_sp_playerName.innerHTML = name;
+    e_playerName.innerHTML = name;
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function playerNameOK() {
+    setPlayerName(e_playerNameInput.value.trim().replace(/\s\s+/g, ' '));
+    hideSetPlayerNameFloater();
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function playerNameCancel() {
+    setPlayerName(e_playerName.innerHTML.trim().replace(/\s\s+/g, ' '));
     hideSetPlayerNameFloater();
 }

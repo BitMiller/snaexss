@@ -25,7 +25,9 @@ let e_overlay = document.getElementById("id_overlay");
 
 let e_playerNameInput = document.getElementById("id_playerNameInput");
 
-let e_bt_playerName = document.getElementById("id_bt_playerName");
+let e_bt_playerNameOK = document.getElementById("id_bt_playerNameOK");
+
+let e_bt_playerNameCancel = document.getElementById("id_bt_playerNameCancel");
 
 let e_nameLine = document.getElementById("id_nameLine");
 

@@ -12,9 +12,33 @@ const directionKeys = [
 
 let wasPlayingBeforeMenu = false;
 
-let captureGameKeys = true;
-
 let gameState = GAME_STATE.IDLE;
+
+
+const KEY_CAPTURE_MODE = {
+    PLAYING : 0,
+    FLOATER : 1,
+    DISABLED : 2
+};
+
+class KeyCaptureMode {
+    #mode;
+    constructor() {
+        this.#mode = KEY_CAPTURE_MODE.PLAYING;
+    }
+
+    get mode() { return this.#mode; }
+
+    set mode(m) {
+        this.#mode = m;
+        pressedKeys.clear();
+    }
+}
+
+let keyCapture = new KeyCaptureMode();
+console.log("keyCapture:");
+console.log(keyCapture.mode);
+
 
 const combos = [
     ["F11"], //> Full Screen
@@ -28,25 +52,42 @@ const combos = [
 /*====================*/
 
 function keyDownHandler(event) {
-    if (!captureGameKeys)
-        return;
+    if (keyCapture.mode == KEY_CAPTURE_MODE.FLOATER) {
+        console.log("keyDownHandler FLOATER event.code:");
+        console.log(event.code);
+        if (!e_setPlayerName.classList.contains("cl_displayNone")) {
+            if (event.code == "Enter" || event.code == "Escape") {
+                event.preventDefault();
+                event.stopPropagation();
 
-    if (!pressedKeys.has(event.code)) {
-        pressedKeys.add(event.code);
+                if (event.code == "Enter")
+                    playerNameOK();
+                else if (event.code == "Escape")
+                    playerNameCancel();
+            }
+        }
     }
 
-    let isCombo = isComboPressed();
-    if (!isCombo) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
+    if (keyCapture.mode == KEY_CAPTURE_MODE.PLAYING) {
+        console.log("keyDownHandler PLAYING event.code:");
+        console.log(event.code);
+        if (!pressedKeys.has(event.code)) {
+            pressedKeys.add(event.code);
+        }
 
-    if (directionKeys.includes(event.code)) {
-        keyDirectionsHandler(event.code);
-    }
+        let isCombo = isComboPressed();
+        if (!isCombo) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
-    if (event.code == "Space" || event.code == "Enter") {
-        keySpaceHandler();
+        if (directionKeys.includes(event.code)) {
+            keyDirectionsHandler(event.code);
+        }
+
+        if (event.code == "Space" || event.code == "Enter") {
+            keySpaceHandler();
+        }
     }
 }
 
@@ -123,16 +164,3 @@ function isComboPressed(combo = []) {
 /*====================*/
 /*====================*/
 /*====================*/
-
-function disableGameKeysCapture() {
-    captureGameKeys = false;
-    pressedKeys.clear();
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function enableGameKeysCapture() {
-    captureGameKeys = true;
-}
