@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
             keySpaceHandler();
+            //gamePause();
             wasPlayingBeforeMenu = true;
         }
     });
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
             keySpaceHandler();
+            //gamePlay();
             wasPlayingBeforeMenu = false;
         }
     });
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
             keySpaceHandler();
+            //gamePause();
             wasPlayingBeforeMenu = true;
         }
     });
@@ -70,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
             keySpaceHandler();
+            //gamePlay();
             wasPlayingBeforeMenu = false;
         }
     });
@@ -80,7 +84,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     e_playerNameInput.addEventListener("beforeinput", (event) => {
-        console.log(event.data);
+        handleNameBeforeInput(event);
+    });
+
+    e_playerNameInput.addEventListener("input", (event) => {
+        handleNameInput();
     });
 
     e_bt_playerNameOK.addEventListener("click", () => {
@@ -91,7 +99,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         playerNameCancel();
     });
 
-
+    e_playerNameInput.addEventListener("animationend", () => {
+        e_playerNameInput.classList.remove("cl_animFlashRedTwice");
+    });
+    
 
 
     gameIdle();

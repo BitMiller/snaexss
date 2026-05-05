@@ -163,6 +163,11 @@ body {
     font-size: 1.5vh;
 }
 
+.cl_animFlashRedTwice {
+    animation-name: flashRedTwice;
+    animation-duration: 1s;
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
@@ -365,6 +370,22 @@ body {
 
 #id_bt_playerNameCancel {
     margin: 2vh;
+}
+
+#id_playerNameInput {
+    width: 35vh;
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+@keyframes flashRedTwice {
+    0%   { background-color: white; }
+    25%  { background-color: red; }
+    50%  { background-color: white; }
+    75%  { background-color: red; }
+    100% { background-color: white; }
 }
 
 /*====================*/

@@ -36,8 +36,8 @@ class KeyCaptureMode {
 }
 
 let keyCapture = new KeyCaptureMode();
-console.log("keyCapture:");
-console.log(keyCapture.mode);
+/*console.log("keyCapture:");
+console.log(keyCapture.mode);*/
 
 
 const combos = [
@@ -52,43 +52,44 @@ const combos = [
 /*====================*/
 
 function keyDownHandler(event) {
-    if (keyCapture.mode == KEY_CAPTURE_MODE.FLOATER) {
-        console.log("keyDownHandler FLOATER event.code:");
-        console.log(event.code);
-        if (!e_setPlayerName.classList.contains("cl_displayNone")) {
-            if (event.code == "Enter" || event.code == "Escape") {
-                event.preventDefault();
-                event.stopPropagation();
-
-                if (event.code == "Enter")
-                    playerNameOK();
-                else if (event.code == "Escape")
-                    playerNameCancel();
-            }
-        }
-    }
-
-    if (keyCapture.mode == KEY_CAPTURE_MODE.PLAYING) {
-        console.log("keyDownHandler PLAYING event.code:");
-        console.log(event.code);
-        if (!pressedKeys.has(event.code)) {
-            pressedKeys.add(event.code);
-        }
+    if (!pressedKeys.has(event.code)) {
+        pressedKeys.add(event.code);
 
         let isCombo = isComboPressed();
-        if (!isCombo) {
+        if (isCombo)
+            return;
+        else if (keyCapture.mode == KEY_CAPTURE_MODE.PLAYING) {
             event.preventDefault();
             event.stopPropagation();
         }
 
-        if (directionKeys.includes(event.code)) {
-            keyDirectionsHandler(event.code);
+        if (keyCapture.mode == KEY_CAPTURE_MODE.FLOATER) {
+            if (!e_setPlayerName.classList.contains("cl_displayNone")) {
+                if (event.code == "Enter" || event.code == "NumpadEnter" || event.code == "Escape") {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    if (event.code == "Enter" || event.code == "NumpadEnter")
+                        playerNameOK();
+                    else if (event.code == "Escape")
+                        playerNameCancel();
+                }
+            }
         }
 
-        if (event.code == "Space" || event.code == "Enter") {
-            keySpaceHandler();
+        else if (keyCapture.mode == KEY_CAPTURE_MODE.PLAYING) {
+            if (directionKeys.includes(event.code)) {
+                keyDirectionsHandler(event.code);
+            }
+
+            else if (event.code == "Space" || event.code == "Enter" || event.code == "NumpadEnter") {
+                keySpaceHandler();
+            }
+            else if (event.code == "Escape" && gameState == GAME_STATE.PLAYING)
+                gamePause();
         }
     }
+
 }
 
 /*====================*/
@@ -164,3 +165,28 @@ function isComboPressed(combo = []) {
 /*====================*/
 /*====================*/
 /*====================*/
+
+function handleNameBeforeInput(event) {
+    //console.log(e_playerNameInput.selectionStart != e_playerNameInput.selectionEnd);
+
+    if (event.data === null)
+        return;
+
+    if (e_playerNameInput.value.length >= 20 && e_playerNameInput.selectionStart == e_playerNameInput.selectionEnd) {
+        if (!e_playerNameInput.classList.contains("cl_animFlashRedTwice"))
+            e_playerNameInput.classList.add("cl_animFlashRedTwice");
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function handleNameInput() {
+    if (e_playerNameInput.value.length > 20)
+        e_playerNameInput.value = e_playerNameInput.value.substring(0, 20);
+}
+
