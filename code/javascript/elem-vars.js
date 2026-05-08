@@ -1,4 +1,6 @@
 
+let e_signOut = document.getElementById("id_signOut");
+
 let e_playerName = document.getElementById("id_playerName");
 
 let e_welcomePlayer = document.getElementById("id_welcomePlayer");

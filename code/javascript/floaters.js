@@ -2,7 +2,13 @@
 function showSetPlayerNameFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_setPlayerName.classList.toggle("cl_displayNone");
-    e_overlay.classList.toggle("cl_active");
+    e_overlay.classList.toggle("cl_overlayActive");
+    //e_overlay.classList.toggle("cl_displayNone");
+    if (gameState == GAME_STATE.PLAYING) {
+        //gamePause();
+        keySpaceHandler();
+        wasPlayingBeforeMenu = true;
+    }
 }
 
 /*====================*/
@@ -12,7 +18,13 @@ function showSetPlayerNameFloater() {
 function hideSetPlayerNameFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
     e_setPlayerName.classList.toggle("cl_displayNone");
-    e_overlay.classList.toggle("cl_active");
+    e_overlay.classList.toggle("cl_overlayActive");
+    //e_overlay.classList.toggle("cl_displayNone");
+    if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
+        //gamePlay();
+        keySpaceHandler();
+        wasPlayingBeforeMenu = false;
+    }
 }
 
 /*====================*/
@@ -22,7 +34,8 @@ function hideSetPlayerNameFloater() {
 function showWelcomeFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_welcomePlayer.classList.toggle("cl_displayNone");
-    e_overlay.classList.toggle("cl_active");
+    e_overlay.classList.toggle("cl_overlayActive");
+    //e_overlay.classList.toggle("cl_displayNone");
     setTimeout(hideWelcomeFloater, 2500);
 }
 
@@ -33,7 +46,8 @@ function showWelcomeFloater() {
 function hideWelcomeFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
     e_welcomePlayer.classList.toggle("cl_displayNone");
-    e_overlay.classList.toggle("cl_active");
+    e_overlay.classList.toggle("cl_overlayActive");
+    //e_overlay.classList.toggle("cl_displayNone");
 }
 
 /*====================*/
@@ -47,6 +61,10 @@ function setPlayerName(name) {
     e_playerNameInput.value = name;
     e_sp_playerName.innerHTML = name;
     e_playerName.innerHTML = name;
+    setCookie("player", name, 1/24);
+
+    /*console.log("Setting player name to:");
+    console.log(name);*/
 }
 
 /*====================*/
@@ -65,4 +83,12 @@ function playerNameOK() {
 function playerNameCancel() {
     setPlayerName(e_playerName.innerHTML.trim().replace(/\s\s+/g, ' '));
     hideSetPlayerNameFloater();
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function signOut() {
+    setPlayerName("");
 }

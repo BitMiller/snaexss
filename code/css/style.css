@@ -232,6 +232,7 @@ body {
 
 #id_blackoutArea {
     position: absolute;
+    display: none;
 
     /*height: 48vh;*/
     width: 100%;
@@ -247,7 +248,8 @@ body {
     transition: opacity 0.3s, backdrop-filter 0.5s;
 }
 
-#id_blackoutArea.cl_active {
+#id_blackoutArea.cl_blackoutAreaActive {
+    display: block;
     opacity: 1;
     backdrop-filter: blur(10px);
 }
@@ -296,7 +298,7 @@ body {
     position: fixed;
     inset: 0;
 
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     /*flex-direction: column;*/
@@ -308,7 +310,8 @@ body {
     pointer-events: none;
 }
 
-#id_overlay.cl_active {
+#id_overlay.cl_overlayActive {
+    display: flex;
     opacity: 1;
     backdrop-filter: blur(5px);
 
@@ -374,6 +377,35 @@ body {
 
 #id_playerNameInput {
     width: 35vh;
+}
+
+#id_statusTexts {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+}
+
+#id_welcomePlayer {
+
+}
+
+#id_signOut {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    border-radius: 1vh;
+    color: #fff;
+    background-color: #0007;
+    font-size: 2vh;
+    margin: 0.5vh;
+    padding: 1vh;
+    cursor: pointer;
+    /*z-index: -1;*/
 }
 
 /*====================*/

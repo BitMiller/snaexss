@@ -232,7 +232,7 @@ function snakeAtePoison() {
         poisonOverkill = true;
     poisonCountDown += POISON_INTERVAL;
     poisonHitCountDown = POISON_HIT_INTERVAL;
-    e_blackoutArea.classList.add("cl_active");
+    e_blackoutArea.classList.add("cl_blackoutAreaActive");
 }
 
 /*====================*/
@@ -267,7 +267,7 @@ function checkPoison() {
 /*====================*/
 
 function healPoison() {
-    e_blackoutArea.classList.remove("cl_active");
+    e_blackoutArea.classList.remove("cl_blackoutAreaActive");
     poisonCountDown = 0;
     poisonHitCountDown = 0;
     poisonOverkill = false;

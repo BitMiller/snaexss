@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         showSetPlayerNameFloater();
     }
     else {
+        e_playerNameInput.value = cookies.player;
         e_sp_playerName.innerHTML = cookies.player;
         e_playerName.innerHTML = cookies.player;
         //console.log("showWelcomeFloater()");
@@ -36,44 +37,48 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     e_bt_toggleDescription.addEventListener("click", () => {
         e_description.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_active");
+        e_overlay.classList.toggle("cl_overlayActive");
+        //e_overlay.classList.toggle("cl_displayNone");
         keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
-            keySpaceHandler();
             //gamePause();
+            keySpaceHandler();
             wasPlayingBeforeMenu = true;
         }
     });
 
     e_bt_toggleDescriptionInner.addEventListener("click", () => {
         e_description.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_active");
+        e_overlay.classList.toggle("cl_overlayActive");
+        //e_overlay.classList.toggle("cl_displayNone");
         keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
-            keySpaceHandler();
             //gamePlay();
+            keySpaceHandler();
             wasPlayingBeforeMenu = false;
         }
     });
 
     e_bt_toggleHiScores.addEventListener("click", () => {
         e_hiScores.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_active");
+        e_overlay.classList.toggle("cl_overlayActive");
+        //e_overlay.classList.toggle("cl_displayNone");
         keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
         if (gameState == GAME_STATE.PLAYING) {
-            keySpaceHandler();
             //gamePause();
+            keySpaceHandler();
             wasPlayingBeforeMenu = true;
         }
     });
 
     e_bt_toggleHiScoresInner.addEventListener("click", () => {
         e_hiScores.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_active");
+        e_overlay.classList.toggle("cl_overlayActive");
+        //e_overlay.classList.toggle("cl_displayNone");
         keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
         if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
-            keySpaceHandler();
             //gamePlay();
+            keySpaceHandler();
             wasPlayingBeforeMenu = false;
         }
     });
@@ -102,7 +107,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     e_playerNameInput.addEventListener("animationend", () => {
         e_playerNameInput.classList.remove("cl_animFlashRedTwice");
     });
-    
+
+    e_signOut.addEventListener("click", () => {
+        signOut();
+    });
 
 
     gameIdle();

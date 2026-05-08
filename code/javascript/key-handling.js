@@ -65,6 +65,7 @@ function keyDownHandler(event) {
 
         if (keyCapture.mode == KEY_CAPTURE_MODE.FLOATER) {
             if (!e_setPlayerName.classList.contains("cl_displayNone")) {
+            //if (e_setPlayerName.style.display != "none") {
                 if (event.code == "Enter" || event.code == "NumpadEnter" || event.code == "Escape") {
                     event.preventDefault();
                     event.stopPropagation();
