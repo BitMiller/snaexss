@@ -1,5 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", () => {
 
     /*console.log(`window.innerWidth: ${window.innerWidth}`);
     console.log(`window.innerHeight: ${window.innerHeight}`);*/

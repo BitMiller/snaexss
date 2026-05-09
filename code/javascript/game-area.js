@@ -1,10 +1,4 @@
 
-let gameArea = [];
-let gameAreaOverlay1 = [];
-let xSize = 20;
-let ySize = 20;
-let gridSize = 15
-
 /*====================*/
 /*====================*/
 /*====================*/
@@ -153,14 +147,7 @@ function spawnPoint(clearanceDistance = 0, areaType) {
     while (tries < maxTries) {
         x = Math.floor(Math.random() * xSize);
         y = Math.floor(Math.random() * ySize);
-/*
-        let isClearPos = isClearPosition(x, y);
-        let isClearDir = isClearInAllDirections(x, y, clearanceDistance);
-        //console.log(`isClearPosition(${x}, ${y}) : ${isClearPos}`);
-        //console.log(`isClearInAllDirections(${x}, ${y}, ${clearanceDistance}) : ${isClearDir}`);
-        if (isClearPos && isClearDir)
-            break;
-*/
+
         if (isClearInRadiusOrOut(x, y, clearanceDistance))
             break;
         tries++;
@@ -169,7 +156,6 @@ function spawnPoint(clearanceDistance = 0, areaType) {
         console.log(`spawnPoint(): Unbelievable! Couldn't spawn a point in a max of ${maxTries} tries!`);
     else
         setPosition(x, y, areaType);
-    //console.log("Tries: "+tries);
 }
 
 /*====================*/
@@ -244,15 +230,12 @@ function isClearInDirection(xPos, yPos, direction, distance) {
     let clear = true;
 
     let i = 1;
-    /*console.log("direction:");
-    console.log(direction);
-    console.log(`xPos + direction.x * i : ${xPos + direction.x * i}`);
-    console.log(`yPos + direction.y * i : ${yPos + direction.y * i}`);*/
+
     while (i <= distance && isClearPosition(xPos + direction.x * i, yPos + direction.y * i))
         i++;
     if (i <= distance)
         clear = false;
-    //console.log("Clear? : "+clear);
+
     return clear;
 }
 
@@ -385,87 +368,6 @@ function directionVectorEndPoint(x, y, direction, size) {
         "x": x + direction.x*size,
         "y": y + direction.y*size
     };
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gameIdle() {
-//> Reset game (play area, couters), show starter text (Press space to play, on mobiles: Tap here to start)
-    gameState = GAME_STATE.IDLE;
-    snakeFreeze = false;
-    stopAnimation();
-    e_appleCounter.innerHTML = 0;
-    e_poisonCounter.innerHTML = 0;
-    e_stepCounter.innerHTML = 0;
-
-    generateGameArea(e_gameAreaContainer);
-    healPoison();
-
-    for (let i = 0; i < 10; i++)
-        spawnPoisonedApple();
-/*
-    for (let i = 0; i < 10; i++)
-        spawnApple(2);
-    for (let i = 0; i < 10; i++)
-        spawnPoison(2);
-*/
-    spawnSnake();
-    drawGameArea();
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gamePlay() {
-    if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED) {
-        gameState = GAME_STATE.PLAYING;
-        startAnimation();
-    }
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gamePause() {
-    if (gameState == GAME_STATE.PLAYING) {
-        gameState = GAME_STATE.PAUSED;
-        stopAnimation();
-    }
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gameUnpause() {
-    if (gameState != GAME_STATE.PLAYING) {
-        gameState = GAME_STATE.PLAYING;
-        startAnimation();
-    }
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gameDead() {
-    gameState = GAME_STATE.DEAD;
-    stopAnimation();
-}
-
-/*====================*/
-/*====================*/
-/*====================*/
-
-function gameWon() {
-    healPoison();
-    gameState = GAME_STATE.WON;
-    snakeFreeze = true;
-    //stopAnimation();
 }
 
 /*====================*/

@@ -1,12 +1,7 @@
-let frame = 0;
-let winAnimationFrame = 0;
 
-let animationHandle = undefined;
-
-let frameInterval = 15;
-let stepInterval = 10;
-let winInterval = 3;
-
+/*====================*/
+/*====================*/
+/*====================*/
 
 function frameStep() {
     if (frame % stepInterval == 0 && !snakeFreeze) {
@@ -29,10 +24,18 @@ function frameStep() {
     frame++;
 }
 
+/*====================*/
+/*====================*/
+/*====================*/
+
 function startAnimation() {
     if (animationHandle === undefined)
         animationHandle = setInterval(frameStep, frameInterval);
 }
+
+/*====================*/
+/*====================*/
+/*====================*/
 
 function stopAnimation() {
     //console.log("Stopped!");
@@ -41,3 +44,7 @@ function stopAnimation() {
         animationHandle = undefined;
     }
 }
+
+/*====================*/
+/*====================*/
+/*====================*/

@@ -1,52 +1,4 @@
 
-const pressedKeys = new Set();
-
-const controlBuffer = [];
-
-const directionKeys = [
-    "ArrowUp",
-    "ArrowRight",
-    "ArrowDown",
-    "ArrowLeft"
-];
-
-let wasPlayingBeforeMenu = false;
-
-let gameState = GAME_STATE.IDLE;
-
-
-const KEY_CAPTURE_MODE = {
-    PLAYING : 0,
-    FLOATER : 1,
-    DISABLED : 2
-};
-
-class KeyCaptureMode {
-    #mode;
-    constructor() {
-        this.#mode = KEY_CAPTURE_MODE.PLAYING;
-    }
-
-    get mode() { return this.#mode; }
-
-    set mode(m) {
-        this.#mode = m;
-        pressedKeys.clear();
-    }
-}
-
-let keyCapture = new KeyCaptureMode();
-/*console.log("keyCapture:");
-console.log(keyCapture.mode);*/
-
-
-const combos = [
-    ["F11"], //> Full Screen
-    ["F12"], //> Dev Tools
-    ["ControlLeft", "ShiftLeft", "KeyR"], //> Full Reload Page on Win
-    ["MetaLeft", "ShiftLeft", "KeyR"], //> Full Reload Page on Mac
-];
-
 /*====================*/
 /*====================*/
 /*====================*/
@@ -191,3 +143,6 @@ function handleNameInput() {
         e_playerNameInput.value = e_playerNameInput.value.substring(0, 20);
 }
 
+/*====================*/
+/*====================*/
+/*====================*/

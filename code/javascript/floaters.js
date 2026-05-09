@@ -1,4 +1,8 @@
 
+/*====================*/
+/*====================*/
+/*====================*/
+
 function showSetPlayerNameFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_setPlayerName.classList.toggle("cl_displayNone");
@@ -63,6 +67,7 @@ function setPlayerName(name) {
     e_playerName.innerHTML = name;
     setCookie("player", name, 1/24);
 
+    //gameIdle();
     /*console.log("Setting player name to:");
     console.log(name);*/
 }
@@ -72,8 +77,16 @@ function setPlayerName(name) {
 /*====================*/
 
 function playerNameOK() {
-    setPlayerName(e_playerNameInput.value.trim().replace(/\s\s+/g, ' '));
-    hideSetPlayerNameFloater();
+    let name = e_playerNameInput.value.trim().replace(/\s\s+/g, ' ');
+
+    if (e_playerName.innerHTML != name && (gameState == GAME_STATE.IDLE || confirm("Névváltoztatáskor a játék újraindul!"))) {
+        setPlayerName(name);
+        hideSetPlayerNameFloater();
+        if (gameState != GAME_STATE.IDLE)
+            gameIdle();
+    }
+    else
+        playerNameCancel();
 }
 
 /*====================*/
@@ -90,5 +103,13 @@ function playerNameCancel() {
 /*====================*/
 
 function signOut() {
-    setPlayerName("");
+    if (gameState == GAME_STATE.IDLE || confirm("Kijelentkezéskor a játék újraindul!")) {
+        setPlayerName("");
+        if (gameState != GAME_STATE.IDLE)
+            gameIdle();
+    }
 }
+
+/*====================*/
+/*====================*/
+/*====================*/

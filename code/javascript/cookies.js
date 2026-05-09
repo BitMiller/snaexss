@@ -1,5 +1,7 @@
 
-let cookies;
+/*====================*/
+/*====================*/
+/*====================*/
 
 function getCookies() {
     /*console.log(`document.cookie:`);
@@ -44,3 +46,7 @@ function setCookie(name, value, expLengthDays = undefined) {
     //console.log(`cookieString: ${cookieString}`);
     document.cookie = cookieString;
 }
+
+/*====================*/
+/*====================*/
+/*====================*/

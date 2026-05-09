@@ -1,4 +1,6 @@
 
+/*====================*/
+
 let e_signOut = document.getElementById("id_signOut");
 
 let e_playerName = document.getElementById("id_playerName");
@@ -35,7 +37,7 @@ let e_nameLine = document.getElementById("id_nameLine");
 
 let e_gameStats = document.getElementById("id_gameStats");
 
-
+/*====================*/
 
 let e_keyPresses = document.getElementById("id_keyPresses");
 
@@ -49,13 +51,19 @@ let e_poisonCounter = document.getElementById("id_poisonCounter");
 
 let e_stepCounter = document.getElementById("id_stepCounter");
 
+/*====================*/
+
 let e_blackoutArea;
 
 let e_mainGameArea;
 
 let e_gameAreaOverlay1;
 
+/*====================*/
+
 /*
 
 let e_ = document.getElementById("id_");
 */
+
+/*====================*/

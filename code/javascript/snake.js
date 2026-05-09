@@ -1,26 +1,4 @@
 
-let snake = {
-    body: [],
-/*
-Snake direction:
-0 = Up
-1 = Right
-2 = Down
-3 = Left
-*/
-    direction: 0,
-    spawned: false
-};
-
-let snakeFreeze = false;
-
-let poisonCountDown = 0;
-let poisonHitCountDown = 0;
-const POISON_INTERVAL = 10;
-const POISON_HIT_INTERVAL = 5;
-const POISON_CLEAR_INTERVAL = 5;
-let poisonOverkill = false;
-
 /*====================*/
 /*====================*/
 /*====================*/
@@ -51,8 +29,6 @@ function spawnSnake() {
             pos_OK = true;
         tries++;
     }
-
-    //console.log(`snake.body.length: ${snake.body.length}`);
 
     if (tries == maxTries)
         console.log(`spawnSnake(): Unbelievable! Couldn't spawn a snake in a max of ${maxTries} tries!`);
@@ -272,3 +248,7 @@ function healPoison() {
     poisonHitCountDown = 0;
     poisonOverkill = false;
 }
+
+/*====================*/
+/*====================*/
+/*====================*/
