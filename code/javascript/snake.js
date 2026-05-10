@@ -146,8 +146,10 @@ function snakeStep() {
 
         snake.body = newBody;
 
-        if (parseInt(e_appleCounter.innerHTML) >= POINTS_TO_WIN)
+        if (parseInt(e_appleCounter.innerHTML) >= POINTS_TO_WIN) {
             gameWon();
+            highScoresShown = false;
+        }
         else
             drawSnake();
     }

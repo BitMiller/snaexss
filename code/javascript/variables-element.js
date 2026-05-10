@@ -9,6 +9,8 @@ let e_welcomePlayer = document.getElementById("id_welcomePlayer");
 
 let e_sp_playerName = document.getElementById("id_sp_playerName");
 
+let e_welcomePlayerContainer = document.getElementById("id_welcomePlayerContainer");
+
 let e_setPlayerName = document.getElementById("id_setPlayerName");
 
 let e_hiScores = document.getElementById("id_hiScores");
@@ -17,15 +19,19 @@ let e_hiScoreList = document.getElementById("id_hiScoreList");
 
 let e_description = document.getElementById("id_description");
 
-let e_bt_toggleHiScores = document.getElementById("id_bt_toggleHiScores");
+let e_bt_showHiScores = document.getElementById("id_bt_showHiScores");
 
-let e_bt_toggleHiScoresInner = document.getElementById("id_bt_toggleHiScoresInner");
+let e_bt_hideHiScores = document.getElementById("id_bt_hideHiScores");
 
-let e_bt_toggleDescription = document.getElementById("id_bt_toggleDescription");
+let e_bt_showDescription = document.getElementById("id_bt_showDescription");
 
-let e_bt_toggleDescriptionInner = document.getElementById("id_bt_toggleDescriptionInner");
+let e_bt_hideDescription = document.getElementById("id_bt_hideDescription");
 
 let e_overlay = document.getElementById("id_overlay");
+
+let e_overlayEffect = document.getElementById("id_overlayEffect");
+
+let e_overlayCancel = document.getElementById("id_overlayCancel");
 
 let e_playerNameInput = document.getElementById("id_playerNameInput");
 

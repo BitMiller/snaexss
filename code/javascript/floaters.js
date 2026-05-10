@@ -7,6 +7,7 @@ function showSetPlayerNameFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
     e_setPlayerName.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_overlayActive");
+    e_overlayEffect.classList.toggle("cl_overlayEffectActive");
     //e_overlay.classList.toggle("cl_displayNone");
     if (gameState == GAME_STATE.PLAYING) {
         //gamePause();
@@ -23,6 +24,7 @@ function hideSetPlayerNameFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
     e_setPlayerName.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_overlayActive");
+    e_overlayEffect.classList.toggle("cl_overlayEffectActive");
     //e_overlay.classList.toggle("cl_displayNone");
     if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
         //gamePlay();
@@ -37,10 +39,12 @@ function hideSetPlayerNameFloater() {
 
 function showWelcomeFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
-    e_welcomePlayer.classList.toggle("cl_displayNone");
+    gameState = GAME_STATE.WELCOME;
+    e_welcomePlayerContainer.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_overlayActive");
+    e_overlayEffect.classList.toggle("cl_overlayEffectActive");
     //e_overlay.classList.toggle("cl_displayNone");
-    setTimeout(hideWelcomeFloater, 2500);
+    welComeFloaterSetTimeoutHandle = setTimeout(hideWelcomeFloater, 2500);
 }
 
 /*====================*/
@@ -49,8 +53,10 @@ function showWelcomeFloater() {
 
 function hideWelcomeFloater() {
     keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
-    e_welcomePlayer.classList.toggle("cl_displayNone");
+    gameState = GAME_STATE.IDLE;
+    e_welcomePlayerContainer.classList.toggle("cl_displayNone");
     e_overlay.classList.toggle("cl_overlayActive");
+    e_overlayEffect.classList.toggle("cl_overlayEffectActive");
     //e_overlay.classList.toggle("cl_displayNone");
 }
 
@@ -60,7 +66,7 @@ function hideWelcomeFloater() {
 
 function setPlayerName(name) {
     if (name == "")
-        name = "Anonymous";
+        name = ANONYMOUS;
 
     e_playerNameInput.value = name;
     e_sp_playerName.innerHTML = name;
@@ -107,6 +113,68 @@ function signOut() {
         setPlayerName("");
         if (gameState != GAME_STATE.IDLE)
             gameIdle();
+    }
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function showDescription() {
+    e_description.classList.remove("cl_displayNone");
+    e_overlay.classList.add("cl_overlayActive");
+    e_overlayEffect.classList.add("cl_overlayEffectActive");
+    //requestAnimationFrame(() => { e_overlayEffect.classList.toggle("cl_overlayEffectActive"); });
+    keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
+    if (gameState == GAME_STATE.PLAYING) {
+        keySpaceHandler();
+        wasPlayingBeforeMenu = true;
+    }
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function hideDescription() {
+    e_description.classList.add("cl_displayNone");
+    e_overlay.classList.remove("cl_overlayActive");
+    e_overlayEffect.classList.remove("cl_overlayEffectActive");
+    keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
+    if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
+        keySpaceHandler();
+        wasPlayingBeforeMenu = false;
+    }
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function showHiScores() {
+    e_hiScores.classList.remove("cl_displayNone");
+    e_overlay.classList.add("cl_overlayActive");
+    e_overlayEffect.classList.add("cl_overlayEffectActive");
+    keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
+    if (gameState == GAME_STATE.PLAYING) {
+        keySpaceHandler();
+        wasPlayingBeforeMenu = true;
+    }
+}
+
+/*====================*/
+/*====================*/
+/*====================*/
+
+function hideHiScores() {
+    e_hiScores.classList.add("cl_displayNone");
+    e_overlay.classList.remove("cl_overlayActive");
+    e_overlayEffect.classList.remove("cl_overlayEffectActive");
+    clearHiScoreHighlight();
+    keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
+    if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
+        keySpaceHandler();
+        wasPlayingBeforeMenu = false;
     }
 }
 

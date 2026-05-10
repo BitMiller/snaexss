@@ -9,6 +9,8 @@ Font discussion:
     --mobile-gui-multiplier: 0.85;
 }
 
+/* #Elements */
+
 body, html {
     margin: 0;
     padding: 0;
@@ -32,6 +34,8 @@ body {
 /*====================*/
 /*====================*/
 /*====================*/
+
+/* #Classes */
 
 .cl_positionAbsolute {
     position: absolute;
@@ -152,7 +156,7 @@ body {
     flex-direction: column;
 
     width: 90vw;
-    height: 90vh;
+    /*height: 90vh;*/
     padding: 2vh;
 
     border: 2px solid #0007;
@@ -168,9 +172,41 @@ body {
     animation-duration: 1s;
 }
 
+.cl_hiScoreRank {
+    /*margin-left: 0;*/
+    text-align: center;
+    /*width: 4vh;*/
+}
+
+.cl_hiScoreName {
+    margin-left: 3vh;
+    text-align: left;
+    /*width: 20vh;*/
+}
+
+.cl_hiScoreScore {
+    /*margin-right: 3vh;*/
+    text-align: center;
+    /*width: 10vh;*/
+}
+
+.cl_highlightHiScoreItem {
+    /*background-color: red;*/
+    border-width: 2px;
+    border-style: solid;
+
+    animation-name: highlightHiScoreItem;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+/* &Classes */
+
 /*====================*/
 /*====================*/
 /*====================*/
+
+/* #IDs */
 
 #id_gameContainer {
     height: 100%;
@@ -287,6 +323,8 @@ body {
 /* #FLOATERS */
 
 #id_hiScores {
+    align-items: center;
+    justify-content: center;
 }
 
 #id_description {
@@ -302,20 +340,41 @@ body {
     justify-content: center;
     align-items: center;
     /*flex-direction: column;*/
-
-    opacity: 0;
-    backdrop-filter: none;
-    transition: opacity 0.5s, backdrop-filter 0.5s;
-
-    pointer-events: none;
 }
 
 #id_overlay.cl_overlayActive {
     display: flex;
+}
+
+#id_overlayEffect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    inset: 0;
+
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    transition: opacity 0.5s, backdrop-filter 0.5s;
+
+    pointer-events: none;
+
+    background: transparent;
+}
+
+#id_overlayEffect.cl_overlayEffectActive {
     opacity: 1;
     backdrop-filter: blur(5px);
 
     pointer-events: auto;
+}
+
+#id_overlayCancel {
+    position: fixed;
+    inset: 0;
+    pointer-events: auto;
+    z-index: -1;
 }
 
 #id_nameLine {
@@ -334,7 +393,7 @@ body {
     margin: 2vh;
 }
 
-#id_bt_toggleDescriptionInner {
+#id_bt_hideDescription {
     width: 14vh;
     height: 4vh;
     margin: 2.5vh auto;
@@ -390,10 +449,6 @@ body {
     pointer-events: none;
 }
 
-#id_welcomePlayer {
-
-}
-
 #id_signOut {
     position: fixed;
     right: 0;
@@ -408,9 +463,100 @@ body {
     /*z-index: -1;*/
 }
 
+#id_welcomePlayerContainer {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+#id_welcomePlayerContainer.cl_displayNone {
+    display: none;
+}
+
+#id_welcomePlayer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 50vw;
+    height: 1vh;
+    padding: 2vh;
+
+    border: 2px solid #0007;
+    border-radius: 2vh;
+
+    color: black;
+    background-color: #fff5;
+    font-size: 1.5vh;
+}
+
+#id_sp_welcomeText {
+    /*margin: 0 auto;*/
+    font-size: 2vh;
+}
+
+#id_sp_playerName {
+    font-size: 3vh;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#id_hiScoreList {
+/* > https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Box_alignment */
+    /*display: grid;
+    grid-template-columns: 1fr 4fr 2fr;*/
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 90vw;
+
+    font-size: 3vh;
+}
+
+#id_hiScoreList > div {
+    display: flex;
+    flex-direction: row;
+
+    width: inherit;
+
+    border-radius: 2vh;
+
+    /*border: 1px solid red;*/
+}
+
+#id_hiScoreList > div > div {
+    /*border: 1px solid green;*/
+}
+
+#id_hiScores button {
+    width: 20vh;
+    margin: 3vh;
+    font-size: 2vh;
+}
+
+#id_hiScores h3 {
+    font-size: 3vh;
+}
+
+/* &IDs */
+
 /*====================*/
 /*====================*/
 /*====================*/
+
+/* #Keyframes #Animations */
 
 @keyframes flashRedTwice {
     0%   { background-color: white; }
@@ -420,9 +566,16 @@ body {
     100% { background-color: white; }
 }
 
+@keyframes highlightHiScoreItem {
+    0%, 100% { border-color: #aff0; }
+    50% { border-color: #0aff; }
+}
+
 /*====================*/
 /*====================*/
 /*====================*/
+
+/* #At-Rules #Media */
 
 @media /*(pointer: coarse)*/ (width <= 415px) {
     /*#id_tb_controlButtons {

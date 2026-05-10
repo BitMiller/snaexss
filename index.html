@@ -86,8 +86,8 @@
                 <button class="cl_gameButton" onclick="gamePlay()">Játék!</button>
                 <button class="cl_gameButton" onclick="gamePause()">Sztoj</button>
                 <button class="cl_gameButton" onclick="gameIdle()">Újrakezd</button>
-                <button id="id_bt_toggleDescription" class="cl_gameButton">Útmutató</button>
-                <button id="id_bt_toggleHiScores" class="cl_gameButton">Ranglista</button>
+                <button id="id_bt_showDescription" class="cl_gameButton">Útmutató</button>
+                <button id="id_bt_showHiScores" class="cl_gameButton">Ranglista</button>
             </div> <!-- id_controlPanel -->
 <!--
 > https://chatgpt.com/c/69ef1626-2a00-8330-9bdc-435f93ea48c3 : war
@@ -131,48 +131,56 @@
         </div> <!-- id_statusTexts -->
 
         <div id="id_overlay">
+            <div id="id_overlayEffect">
 
-            <div id="id_welcomePlayer" class="cl_floater cl_displayFlex cl_displayNone">
-                <span>Üdv, <span id="id_sp_playerName"></span>!</span>
-            </div> <!-- id_welcomePlayer -->
+                <div id="id_overlayCancel"></div>
 
-            <div id="id_setPlayerName" class="cl_displayFlex cl_displayNone">
-                <h3>Üdv Néked, Idegen!</h3>
-                <p>Ne játssz az idegen,</p>
-                <p>Írd meg a neve... den.</p>
-                <!--<h3>Hello, Complete Stranger!</h3>
-                <p>Introduce thy name!</p>-->
-                <input type="text" id="id_playerNameInput">
-                <button type="button" id="id_bt_playerNameOK">Így jó is lesz.</button>
-                <button type="button" id="id_bt_playerNameCancel">Úgy jó is volt.</button>
-            </div> <!-- id_setPlayerName -->
+                <div id="id_welcomePlayerContainer" class="cl_displayNone">
+                    <div id="id_welcomePlayer">
+                        <span id="id_sp_welcomeText">Üdv, <span id="id_sp_playerName"></span>&nbsp;!</span>
+                    </div> <!-- id_welcomePlayer -->
+                </div> <!-- id_welcomePlayerContainer -->
 
-            <div id="id_description" class="cl_floater cl_displayFlex cl_displayNone">
-                <h3 class="cl_textAlignCenter">~ Útmutató ~</h3>
-                <h4>Irányítás:</h4>
-                <p>- [Space] / [Enter] : Játék indítása, megállítása, halál esetén újrakezdése</p>
-                <p>- [Iránygombok] : A kukac irányítása</p>
-                <h4>Játékszabály:</h4>
-                <p>- A piros almákból kell 20 db-ot összegyűjteni a csodás pillangóvá váláshoz.</p>
-                <p>- A cián színű körök a permet az almákon, az lemérgezi a kukacot, ami x időre zavarja a látását.<br>
-                Ha fogyaszt belőle, a mérgezési idő az előzőhöz hozzáadódik.</p>
-                <p>- Ha egy alma megevésre kerül, új terem, ciánostul. A megevett alma mérge megmarad, és a kukac hossza is eggyel nő.</p>
-                <p>- A játék csak akkor sikeres, ha a 20 alma összegyűlik. A végső pontszám majd abból adódik, hogy milyen kevés lépés és méreg elfogyasztásával sikerült végigvinni a csetlő-botló-bolyongó kukac-létet.</p>
-                <button id="id_bt_toggleDescriptionInner" class="cl_textAlignCenter">Ércsem</button>
-            </div> <!-- id_description -->
+                <div id="id_setPlayerName" class="cl_displayFlex cl_displayNone">
+                    <h3>Üdv Néked, Idegen!</h3>
+                    <p>Ne játssz az idegen,</p>
+                    <p>Írd meg a neve... den.</p>
+                    <!--<h3>Hello, Complete Stranger!</h3>
+                    <p>Introduce thy name!</p>-->
+                    <input type="text" id="id_playerNameInput">
+                    <button type="button" id="id_bt_playerNameOK">Így jó is lesz.</button>
+                    <button type="button" id="id_bt_playerNameCancel">Úgy jó is volt.</button>
+                </div> <!-- id_setPlayerName -->
 
-            <div id="id_hiScores" class="cl_floater cl_displayFlex cl_displayNone">
-                <h3 class="cl_textAlignCenter">~ Ranglista ~</h3>
-                <div id="id_hiScoreList"></div>
-                <button id="id_bt_toggleHiScoresInner" class="cl_textAlignCenter">Rendics</button>
-            </div> <!-- id_hiScores -->
+                <div id="id_description" class="cl_floater cl_displayFlex cl_displayNone">
+                    <h3 class="cl_textAlignCenter">~ Útmutató ~</h3>
+                    <h4>Irányítás:</h4>
+                    <p>- [Space] / [Enter] : Játék indítása, megállítása, halál esetén újrakezdése</p>
+                    <p>- [Iránygombok] : A kukac irányítása</p>
+                    <h4>Játékszabály:</h4>
+                    <p>- A piros almákból kell 20 db-ot összegyűjteni a csodás pillangóvá váláshoz.</p>
+                    <p>- A cián színű körök a permet az almákon, az lemérgezi a kukacot, ami x időre zavarja a látását.<br>
+                    Ha fogyaszt belőle, a mérgezési idő az előzőhöz hozzáadódik.</p>
+                    <p>- Ha egy alma megevésre kerül, új terem, ciánostul. A megevett alma mérge megmarad, és a kukac hossza is eggyel nő.</p>
+                    <p>- A játék csak akkor sikeres, ha a 20 alma összegyűlik. A végső pontszám majd abból adódik, hogy milyen kevés lépés és méreg elfogyasztásával sikerült végigvinni a csetlő-botló-bolyongó kukac-létet.</p>
+                    <button id="id_bt_hideDescription" class="cl_textAlignCenter">Ércsem</button>
+                </div> <!-- id_description -->
 
+                <div id="id_hiScores" class="cl_floater cl_displayFlex cl_displayNone">
+                    <h3 class="cl_textAlignCenter">~ Ranglista ~</h3>
+                    <div id="id_hiScoreList"></div>
+                    <button id="id_bt_hideHiScores" class="cl_textAlignCenter">Rendics</button>
+                </div> <!-- id_hiScores -->
+
+            </div> <!-- id_overlayEffect -->
         </div> <!-- id_overlay -->
 
 
         <script type="text/javascript" src="code/javascript/cookies.js"></script>
+        <script type="text/javascript" src="code/javascript/localStorage.js"></script>
         <script type="text/javascript" src="code/javascript/variables-global.js"></script>
         <script type="text/javascript" src="code/javascript/variables-element.js"></script>
+        <script type="text/javascript" src="code/javascript/hiscores.js"></script>
         <script type="text/javascript" src="code/javascript/colors.js"></script>
         <script type="text/javascript" src="code/javascript/game.js"></script>
         <script type="text/javascript" src="code/javascript/game-area.js"></script>

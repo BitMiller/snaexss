@@ -4,24 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /*console.log(`window.innerWidth: ${window.innerWidth}`);
     console.log(`window.innerHeight: ${window.innerHeight}`);*/
 
-/*
-    setCookie("player", "Anonymous", 1/24);
-    setCookie("testKey", "testValue", 1/24);
-*/
-    getCookies();
-    if (typeof cookies.player === "undefined" || cookies.player == "") {
-        //setCookie("player", "Anonymous", 1/24);
-        //console.log("showSetPlayerNameFloater()");
-        showSetPlayerNameFloater();
-    }
-    else {
-        e_playerNameInput.value = cookies.player;
-        e_sp_playerName.innerHTML = cookies.player;
-        e_playerName.innerHTML = cookies.player;
-        //console.log("showWelcomeFloater()");
-        showWelcomeFloater();
-    }
-
     document.addEventListener("keydown", keyDownHandler);
     document.addEventListener("keyup", keyUpHandler);
 
@@ -35,52 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Window focus is back.");
     });
 
-    e_bt_toggleDescription.addEventListener("click", () => {
-        e_description.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_overlayActive");
-        //e_overlay.classList.toggle("cl_displayNone");
-        keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
-        if (gameState == GAME_STATE.PLAYING) {
-            //gamePause();
-            keySpaceHandler();
-            wasPlayingBeforeMenu = true;
-        }
+    e_bt_showDescription.addEventListener("click", () => {
+        showDescription();
     });
 
-    e_bt_toggleDescriptionInner.addEventListener("click", () => {
-        e_description.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_overlayActive");
-        //e_overlay.classList.toggle("cl_displayNone");
-        keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
-        if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
-            //gamePlay();
-            keySpaceHandler();
-            wasPlayingBeforeMenu = false;
-        }
+    e_bt_hideDescription.addEventListener("click", () => {
+        hideDescription();
     });
 
-    e_bt_toggleHiScores.addEventListener("click", () => {
-        e_hiScores.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_overlayActive");
-        //e_overlay.classList.toggle("cl_displayNone");
-        keyCapture.mode = KEY_CAPTURE_MODE.FLOATER;
-        if (gameState == GAME_STATE.PLAYING) {
-            //gamePause();
-            keySpaceHandler();
-            wasPlayingBeforeMenu = true;
-        }
+    e_bt_showHiScores.addEventListener("click", () => {
+        showHiScores();
     });
 
-    e_bt_toggleHiScoresInner.addEventListener("click", () => {
-        e_hiScores.classList.toggle("cl_displayNone");
-        e_overlay.classList.toggle("cl_overlayActive");
-        //e_overlay.classList.toggle("cl_displayNone");
-        keyCapture.mode = KEY_CAPTURE_MODE.PLAYING;
-        if (gameState == GAME_STATE.PAUSED && wasPlayingBeforeMenu) {
-            //gamePlay();
-            keySpaceHandler();
-            wasPlayingBeforeMenu = false;
-        }
+    e_bt_hideHiScores.addEventListener("click", () => {
+        hideHiScores();
     });
 
     e_nameLine.addEventListener("click", () => {
@@ -112,7 +62,34 @@ document.addEventListener("DOMContentLoaded", () => {
         signOut();
     });
 
+    e_welcomePlayerContainer.addEventListener("click", () => {
+        clearTimeout(welComeFloaterSetTimeoutHandle);
+        hideWelcomeFloater();
+    });
+
+    e_overlayCancel.addEventListener("click", () => {
+        if (!e_setPlayerName.classList.contains("cl_displayNone"))
+            playerNameCancel();
+    });
+
+
+
 
     gameIdle();
+
+    getCookies();
+    if (typeof cookies.player === "undefined" || cookies.player == "" || cookies.player == ANONYMOUS) {
+        showSetPlayerNameFloater();
+    }
+    else {
+        e_playerNameInput.value = cookies.player;
+        e_sp_playerName.innerHTML = cookies.player;
+        e_playerName.innerHTML = cookies.player;
+        //console.log("showWelcomeFloater()");
+        showWelcomeFloater();
+    }
+
+    loadHiScores();
+    populateHiScores();
 
 });

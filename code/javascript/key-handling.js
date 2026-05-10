@@ -16,7 +16,14 @@ function keyDownHandler(event) {
         }
 
         if (keyCapture.mode == KEY_CAPTURE_MODE.FLOATER) {
-            if (!e_setPlayerName.classList.contains("cl_displayNone")) {
+            if (gameState == GAME_STATE.WELCOME && (
+                event.code == "Space" || event.code == "Enter" || event.code == "NumpadEnter" || event.code == "Escape")) {
+                clearTimeout(welComeFloaterSetTimeoutHandle);
+                hideWelcomeFloater();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else if (!e_setPlayerName.classList.contains("cl_displayNone")) {
             //if (e_setPlayerName.style.display != "none") {
                 if (event.code == "Enter" || event.code == "NumpadEnter" || event.code == "Escape") {
                     event.preventDefault();
@@ -74,6 +81,13 @@ function keyDirectionsHandler(keyCode) {
 function keySpaceHandler() {
     if (gameState == GAME_STATE.IDLE || gameState == GAME_STATE.PAUSED)
         gamePlay();
+    else if (gameState == GAME_STATE.WON && !highScoresShown) {
+        let score = 1000 + parseInt(e_appleCounter.innerHTML) - parseInt(e_stepCounter.innerHTML) - parseInt(e_poisonCounter.innerHTML)*10;
+        score = score < 0 ? 0 : score;
+        updateHiScores(e_playerName.innerHTML, score);
+        highScoresShown = true;
+        showHiScores();
+    }
     else if (gameState == GAME_STATE.DEAD || gameState == GAME_STATE.WON) {
         console.log("Revival!");
         gameIdle();

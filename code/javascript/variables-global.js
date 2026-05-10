@@ -26,8 +26,23 @@ const GAME_STATE = {
     PLAYING : 1,
     PAUSED : 2,
     DEAD : 3,
-    WON : 4
+    WON : 4,
+    WELCOME : 5
 };
+
+const ANONYMOUS = "Anonymous"
+
+let gameState = GAME_STATE.IDLE;
+
+let wasPlayingBeforeMenu = false;
+
+let welComeFloaterSetTimeoutHandle;
+
+let hiScores = [];
+
+const HISCORE_LINE_COUNT = 10;
+
+let highScoresShown = true;
 
 /*====================*/
 /*====================*/
@@ -90,11 +105,6 @@ const directionKeys = [
     "ArrowDown",
     "ArrowLeft"
 ];
-
-let wasPlayingBeforeMenu = false;
-
-let gameState = GAME_STATE.IDLE;
-
 
 const KEY_CAPTURE_MODE = {
     PLAYING : 0,
