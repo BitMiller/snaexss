@@ -76,6 +76,21 @@ const LEFT = 3;
 
 
 const KEY_TO_DIRECTION = {
+    "KeyW": 0,
+    "KeyD": 1,
+    "KeyS": 2,
+    "KeyA": 3
+};
+
+const DIRECTION_TO_KEY = [
+    "KeyW",
+    "KeyD",
+    "KeyS",
+    "KeyA"
+];
+
+/*
+const KEY_TO_DIRECTION = {
     "ArrowUp": 0,
     "ArrowRight": 1,
     "ArrowDown": 2,
@@ -88,7 +103,7 @@ const DIRECTION_TO_KEY = [
     "ArrowDown",
     "ArrowLeft"
 ];
-
+*/
 /*====================*/
 /*====================*/
 /*====================*/
@@ -100,12 +115,19 @@ const pressedKeys = new Set();
 const controlBuffer = [];
 
 const directionKeys = [
+    "KeyW",
+    "KeyD",
+    "KeyS",
+    "KeyA"
+];
+/*
+const directionKeys = [
     "ArrowUp",
     "ArrowRight",
     "ArrowDown",
     "ArrowLeft"
 ];
-
+*/
 const KEY_CAPTURE_MODE = {
     PLAYING : 0,
     FLOATER : 1,
